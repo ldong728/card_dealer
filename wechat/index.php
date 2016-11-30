@@ -4,7 +4,9 @@ include_once $GLOBALS['mypath'].'/wechat/interfaceHandler.php';
 include_once $GLOBALS['mypath'].'/wechat/wechat.php';
 include_once $GLOBALS['mypath'].'/wechat/reply.php';
 include_once $GLOBALS['mypath'].'/wechat/oauth.php';
+include_once $GLOBALS['mypath'].'/wechat/usersdk.php';
 include_once $GLOBALS['mypath'].'/wechat/serveManager.php';
+
 session_start();
 //createButtonTemp();
 
@@ -17,6 +19,7 @@ if(isset($_GET['oauth'])&&!isset($_SESSION['openId'])){//未获取用户信息�
     $oauth->getOauth();
     exit;
 }elseif(isset($_SESSION['openId'])){//已获取用户信息，直接跳转
+    mylog('have user inf');
     $diract=isset($_GET['diract'])?$_GET['diract'] : 'none';
     header('location:../mobile/controller.php?module='.$diract);
 }
@@ -25,7 +28,8 @@ if(isset($_GET['state'])&&isset($_SESSION['oauthType'])){//从授权页跳转至
     if(isset($_GET['code'])){
         $userId=oauth::getOauthToken($_GET['code']);
         $_SESSION['openId']=$userId['openid'];
-        $user=new usersdk($_SESSION['open']);
+
+        $user=new usersdk($_SESSION['openId']);
         $userInf=$user->syncUserInf('user_tbl');
         $_SESSION['user_level']=$userInf['user_level'];
         if('snsapi_userinfo'==$_SESSION['oauthType']){

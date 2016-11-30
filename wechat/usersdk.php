@@ -22,14 +22,21 @@ class usersdk
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=' . $this->openId . '&lang=zh_CN';
         $jsonData = interfaceHandler::getHandler()->getByCurl($url);
         $inf = json_decode($jsonData, true);
-        if (!isset($inf['nickname']) || $inf['nickname'] == '') {
-            $inf['nickname'] = '游客';
-            $inf['headimgurl'] = 'images/no_img_user.jpg';
-            $inf['subscribe'] = 0;
+        if(!isset($inf['errcode'])){
+            if (!isset($inf['nickname']) || $inf['nickname'] == '') {
+                $inf['nickname'] = '游客';
+                $inf['headimgurl'] = 'images/no_img_user.jpg';
+                $inf['subscribe'] = 0;
 //            $jsonData = json_encode($inf, JSON_UNESCAPED_UNICODE);
-        }
+            }
+
 //        return json_decode($jsonData, true);
-        return $inf;
+            return $inf;
+        }else{
+            mylog($jsonData);
+            return null;
+        }
+
     }
 
     public function syncUserInf($userTblName){
@@ -37,12 +44,16 @@ class usersdk
         $userInfLocal=pdoQuery($userTblName,null,array('openid'=>$this->openId),' limit 1');
         $userInfLocal=$userInfLocal->fetch();
         if(!$userInfLocal||($userInfLocal['update_time']+3600*24)<time()){
-            $inf=$this->getUserInf();
-            $inf['update_time']=time();
-            pdoInsert($userTblName,$inf,'update');
-            if(!$userInfLocal)$inf['user_level']=0;
-            else $inf['user_level']=$userInfLocal['user_level'];
-            return $inf;
+            if($inf=$this->getUserInf()){
+                $inf['update_time']=time();
+                pdoInsert($userTblName,$inf,'update');
+                if(!$userInfLocal)$inf['user_level']=0;
+                else $inf['user_level']=$userInfLocal['user_level'];
+                return $inf;
+            }else{
+                return null;
+            }
+
         }else{
             return $userInfLocal;
         }

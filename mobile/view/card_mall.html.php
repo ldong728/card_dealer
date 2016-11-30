@@ -18,7 +18,7 @@
 <script>
     $('.button_box').click(function(){
         var card_id=this.id;
-        alert(card_id);
+//        alert(card_id);
     });
 </script>
 </body>
