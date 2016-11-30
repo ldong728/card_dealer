@@ -1,0 +1,232 @@
+
+.baseInfo .pd_info dl .payAfter {
+    background-color: #d5c7bc;
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0 4px;
+    border-radius: 3px;
+    line-height: 15px;
+}
+
+.baseInfo .pd_info dl .payAfter em {
+    display: inline-block;
+    padding: 0 4px;
+    color: #fff;
+    background-color: #aa8c74;
+    line-height: 18px;
+}
+
+.baseInfo .pd_info dl .zheng, .baseInfo .pd_info dl .tui, .baseInfo .pd_info dl .bao {
+    color: #999;
+    margin-right: 10px;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+}
+
+.baseInfo .pd_info dl .zheng {
+    background: url(images/zheng.png) no-repeat;
+    background-position: left;
+    background-size: 16px 16px;
+    padding-left: 17px;
+}
+
+.baseInfo .pd_info dl .tui {
+    background: url(images/tui.png) no-repeat;
+    background-position: left;
+    background-size: 16px 16px;
+    padding-left: 17px;
+}
+
+.baseInfo .pd_info dl .bao {
+    background: url(images/bao.png) no-repeat;
+    background-position: left;
+    background-size: 16px 16px;
+    padding-left: 17px;
+}
+
+.baseInfo .pd_info dl del {
+    color: #aaa;
+    line-height: 18px;
+    margin-left: 3px;
+}
+
+.baseInfo .pd_info .offshelf {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-top: 1px dotted #ccc;
+    color: #999;
+}
+
+.baseInfo .pd_info .sdNotice {
+    border-top: 1px solid #ccc;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.baseInfo .pd_info .sdNotice .cl_red {
+    border: 2px solid #f13031;
+    display: inline-block;
+    margin: 10px 10px 5px;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+
+.baseInfo .pd_info .sdNotice .cl_red span {
+    padding: 0 4px;
+    font-size: 14px;
+    line-height: 26px;
+    color: #f13031;
+    font-weight: 700;
+}
+
+.baseInfo .pd_info .sdNotice p {
+    color: #999;
+    padding: 10px 0;
+}
+
+.baseInfo .pd_info .sdNotice p span {
+    color: #999;
+    font-weight: 700;
+}
+
+.pDetail .fixedMenuBox {
+    height: 48px;
+    background: #fff;
+    width: 100%;
+    min-width: 320px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #ccc;
+    z-index: 14;
+}
+
+.pDetail .fixedMenuBox .buttonSet {
+    margin: 0 auto;
+    width: 100%;
+    min-width: 320px;
+    max-width: 1024px;
+    height: 48px;
+    box-shadow: 0px -1px 5px #dcdcdc;
+}
+
+.pDetail .fixedMenuBox .buttonSet a {
+    font-size: 16px;
+}
+
+.fixedMenuBox .buttonSet .buyBtn {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    background-color: #eb0b30;
+    width: 40%;
+    height: 40px;
+    margin: 4px 0;
+    border-radius: 3px;
+    line-height: 40px;
+    margin-right: 1%;
+    margin-left: 3%;
+    float: left;
+}
+
+.fixedMenuBox .buttonSet .cartBtn {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    background-color: #0587f6;
+    width: 40%;
+    height: 40px;
+    margin: 4px 0;
+    border-radius: 3px;
+    line-height: 40px;
+    float: left;
+}
+
+.fixedMenuBox .buttonSet .goCart {
+    display: inline-block;
+    float: right;
+    height: 30px;
+    width: 30px;
+    margin: 9px 3% 9px 0;
+    background: url(images/icon_cart.png) no-repeat;
+    background-size: 30px 30px;
+}
+
+.pDetail .toast {
+    padding: 20px 30px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+    -webkit-transform: translate(-50%, -45%);
+    background-color: #333;
+    opacity: 0.8;
+    display: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+    min-width: 126px;
+    max-width: 196px;
+}
+
+.pDetail .baseInfo .shelves_nav {
+    background-color: #fff;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 10px;
+    box-shadow: 0 1px 1px #dcdcdc;
+}
+
+.pDetail .shelves_nav .shelvesNav {
+    display: block;
+    padding: 0 3%;
+    height: 46px;
+    line-height: 46px;
+    font-size: 14px;
+    background: url(images/icon-right.png) no-repeat;
+    background-position: 98% 50%;
+    background-size: 10px 14px;
+    border-bottom: 1px dashed #dcdcdc;
+}
+
+.pDetail .shelves_nav .shelvesNav:last-child {
+    border-bottom: none;
+}
+
+.pDetail .shelves_nav .noIcon {
+    background: none;
+}
+
+.pDetail .pro_desc {
+    width: 94%;
+    padding: 0 3%;
+    margin-top: 10px;
+    box-shadow: 0 1px 1px #dcdcdc;
+    background-color: #fff;
+    display: none;
+}
+
+.pDetail .pro_desc .descTit {
+    height: 42px;
+    line-height: 42px;
+    font-size: 14px;
+}
+
+.pDetail .pro_desc p {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+s, strike, del {
+    text-decoration: line-through;
+}

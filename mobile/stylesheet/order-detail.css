@@ -1,0 +1,482 @@
+/*订单详情*/
+.ordreDetail {
+    width: 94%;
+    min-width: 300px;
+    max-width: 1024px;
+    margin: 0 3%;
+    margin-top: 20px;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 16px
+}
+
+.ordreDetail .orderTransp {
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    position: relative;
+}
+
+.ordreDetail .orderTransp .transp_hd {
+    height: 3px;
+    background: url(images/icon-xin.png);
+    background-size: 66px 6px;
+}
+
+.ordreDetail .orderTransp .show_wuliu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: none;
+    height: 32px;
+    width: 100%;
+    background: url(images/icon-bottom.png) no-repeat;
+    background-position: center center;
+    background-color: #fff;
+    background-size: 14px 10px;
+}
+
+.ordreDetail .orderTransp .hide_wuliu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: none;
+    height: 32px;
+    width: 100%;
+    background: url(images/icon-top.png) no-repeat;
+    background-position: center center;
+    background-color: #fff;
+    background-size: 14px 10px;
+}
+
+.orderTransp .address {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e3e3e3
+}
+
+.orderTransp .address p {
+    margin: 5px 15px 0;
+    color: #999;
+}
+
+.orderTransp .address .add_tit {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.orderTransp .transport {
+    padding-bottom: 29px;
+}
+
+.orderTransp .transport i {
+    color: #666;
+    border-radius: 10px;
+    background-color: #949494;
+    height: 10px;
+    width: 10px;
+    display: block;
+    margin-left: 11px;
+    margin-right: 10px;
+    float: left;
+}
+
+.orderTransp .transport span {
+    display: block;
+    color: #666;
+}
+
+.orderTransp .transport .transNone {
+    background: none;
+    padding: 3px 0 0 12px;
+    font-family: microsoft yahei;
+}
+
+.orderTransp .transport p:first-child {
+    background: none;
+    padding: 3px 0 0 12px;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: microsoft yahei;
+}
+
+.orderTransp .transport p:nth-child(2) i {
+    border-radius: 10px;
+    background-color: #188443;
+    margin-left: 11px;
+    width: 10px;
+    height: 10px;
+}
+
+.orderTransp .transport .trTime {
+    color: #999;
+    margin-left: 35px;
+}
+
+.orderTransp .transport .tran_tit {
+    color: #666;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.orderTransp .transport .trCont {
+    background: url(images/line_01.jpg) repeat-y;
+    background-position: 9px;
+    padding-bottom: 15px;
+    background-position: 15.5px 0;
+}
+
+.orderTransp .transport .trCont:last-child {
+    background: none;
+}
+
+.orderTransp .transport p:nth-child(2) .word {
+    color: #188443;
+}
+
+.orderTransp .transport .trCont .word {
+    float: left;
+    word-break: break-all;
+    width: 86%;
+    font-family: microsoft yahei;
+    margin-left: 5px;
+    margin-bottom: 3px;
+    margin-top: -4px;
+    line-height: 18px;
+}
+
+.ordreDetail .orderState {
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+
+.ordreDetail .orderState div {
+    height: 38px;
+    line-height: 38px;
+    font-size: 14px;
+    background-color: #fff;
+    padding-left: 15px;
+    color: #666;
+    border-bottom: 1px solid #ccc;
+}
+
+.ordreDetail .orderState .cl_sta {
+    float: left;
+    font-size: 14px;
+    color: #666;
+    width: 70px;
+    line-height: 38px;
+}
+
+.orderState span {
+    line-height: 38px;
+}
+
+.ordreDetail .orderState .cl_red {
+    color: #eb0b30;
+    font-size: 14px;
+    background: url(images/icon-right.png) no-repeat;
+    background-size: 10px 14px;
+    background-position: right center;
+    display: block;
+    float: left;
+    margin-top: 10px;
+    width: 69%;
+    width: calc(100% - 80px);
+    line-height: 20px;
+}
+
+.ordreDetail .orderState .drawback {
+    color: #4197E8;
+    font-size: 14px;
+    float: right;
+    line-height: 38px;
+    margin-right: 15px;
+}
+
+.ordreDetail .orderList .list_hd {
+    height: 44px;
+    background-color: #f6f6f6;
+    border: 1px solid #ccc;
+}
+
+.ordreDetail .orderList .orderMerchant {
+    margin-left: 15px;
+    line-height: 44px;
+    font-size: 14px;
+    text-decoration: none;
+    background: url(images/greyRight.png) no-repeat;
+    background-size: 10px 14px;
+    background-position: right center;
+    display: block;
+    float: left;
+    width: 62%;
+    overflow: hidden;
+    width: -moz-calc(100% - 121px);
+    width: -webkit-calc(100% - 121px);
+    width: -o-calc(100% - 121px);
+    width: calc(100% - 121px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.list_hd .shopInfo .shopContact {
+    width: 106px;
+    height: 32px;
+    float: right;
+    overflow: hidden;
+}
+
+.list_hd .shopContact a {
+    border-left: 1px solid #e2e2e2;
+    display: block;
+    float: right;
+    width: 28px;
+    height: 28px;
+    padding: 0 10px;
+    margin: 8px 0;
+}
+
+.list_hd .shopContact .qqContact {
+    background: url(images/greyQq.png) no-repeat;
+    background-size: 28px;
+    background-position: center;
+}
+
+.list_hd .shopContact .telContact {
+    background: url(images/greyTel.png) no-repeat;
+    background-size: 26px;
+    background-position: center;
+}
+
+.ordreDetail .orderList dd {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-bottom: none;
+    padding-bottom: 5px;
+}
+
+.ordreDetail .orderList dd.borderLine {
+    border-bottom: 1px solid #ccc;
+}
+
+.orderList dd img {
+    float: left;
+    border: 1px solid #dddddd;
+    margin: 15px;
+}
+
+.orderList .pd_detail {
+    padding-top: 10px;
+    height: 85px;
+    width: 100%;
+}
+
+.orderList .pd_detail p {
+    margin-top: 5px;
+}
+
+.orderList .pd_detail .pd_guige {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.orderList .pd_detail .pd_name {
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+.orderList .pd_detail .cl_grey {
+    color: #999;
+}
+
+.orderList .pd_detail .cl_red {
+    color: #eb0b30;
+}
+
+.orderList .comboDetail p {
+    padding-top: 5px;
+}
+
+.orderList .comboDetail .combo_name {
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.orderList .comboDetail .cl_red {
+    color: #eb0b30;
+}
+
+.orderList .comboDetail .cl_red {
+    color: #eb0b30;
+}
+
+.orderList .comboDetail .combo_count, .orderList .comboDetail .combo_price {
+    padding-left: 80px;
+}
+
+.orderList a {
+    line-height: 15px;
+}
+
+.orderList dd {
+    line-height: 14px;
+}
+
+.ordreDetail .orderInfo {
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    margin-top: 10px;
+    background-color: #fff;
+}
+
+.ordreDetail .orderInfo div {
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+    border-bottom: 1px solid #ccc;
+    color: #666;
+    padding-left: 15px;
+}
+.ordreDetail .orderInfo a {
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+}
+
+.ordreDetail .orderInfo div span {
+    font-size: 14px;
+}
+
+.ordreDetail .orderInfo em {
+    display: inline-block;
+    width: 7px;
+}
+
+.ordreDetail .orderInfo b {
+    display: inline-block;
+    width: 28px;
+}
+
+.ordreDetail .order_ft {
+    height: 45px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.ordreDetail .order_ft .order_amount {
+    font-size: 14px;
+    line-height: 45px;
+    margin-left: 15px;
+}
+
+.ordreDetail .order_score_cls {
+    width: 90%;
+    border: 1px solid #ccc;
+    border-top: none;
+    line-height: 22px;
+    font-size: 12px;
+    color: #666;
+    background-color: #e7ea75;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.ordreDetail .order_score_cls .cl_red {
+    color: #eb0b30;
+}
+
+.ordreDetail .order_amount .cl_red {
+    color: #eb0b30;
+    font-size: 14px;
+}
+
+.ordreDetail .order_amount .transp {
+    margin-left: 5px;
+    color: #999;
+}
+
+.ordreDetail .order_btn {
+    margin-top: 10px;
+}
+
+.ordreDetail .order_btn a {
+    float: left;
+    display: inline-block;
+    width: 48%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 1px 1px 1px #ccc;
+}
+
+.ordreDetail .order_btn .btn_orange {
+    background-color: #ff6600;
+    border: 1px solid #aaaaaa;
+    color: #fff;
+}
+
+.ordreDetail .order_btn .btn_white {
+    background-color: #fff;
+    border: 1px solid #aaaaaa;
+    float: right;
+}
+
+.ordreDetail .order_btn .btn_long {
+    background-color: #fff;
+    border: 1px solid #aaaaaa;
+    width: 99%;
+}
+
+.remark {
+    height: 45px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.remark span {
+    line-height: 45px;
+    margin-left: 10px;
+}
+
+.review_button {
+    display: inline-block;
+    width: 70%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 1px 1px 1px #ccc;
+    margin: 10px 15% 20px 15%;
+    background-color: #ff6600;
+    border: 1px solid #aaaaaa;
+    color: #fff;
+}
+
+.noDisplay {
+    height: 10vw;
+}
+
+.blank {
+    width: 100%;
+    height: 17vw;
+    /*position: fixed;*/
+    /*bottom: 17vw;*/
+}
+
+/*优惠券 红包页*/

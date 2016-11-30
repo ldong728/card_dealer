@@ -1,0 +1,59 @@
+{
+    "card": {
+        "card_type": "GIFT",
+        "gift": {
+            "base_info": {
+                "logo_url":  "http://mmbiz.qpic.cn/mmbiz_jpg/7uB5M2kcbcnO9U3HibicuPSfIkjyQMhZ0NwOyrEDmtRvQ55SNzIN8GAR9bktmMPBGATETvqJCjHaeMUvadsYkNGA/0",
+                "brand_name": "谷多网络",
+                "code_type": "CODE_TYPE_ONLY_BARCODE",
+                "title": "时间停止券",
+                "sub_title": "凭此券可免费停止时间--3秒",
+                "color": "Color030",
+                "notice": "使用时请将手机用力往地上摔",
+                "service_phone": "020-88888888",
+                "description": "描述，description字段",
+                "date_info": {
+                    "type": "DATE_TYPE_FIX_TERM",
+                    "fixed_term": 5,
+                    "fixed_begin_term": 0
+                },
+                "sku": {
+                    "quantity": 500
+                },
+                "get_limit": 500,
+                "use_custom_code": false,
+                "bind_openid": true,
+                "can_share": false,
+                "can_give_friend": true,
+                "center_sub_title": "线下使用",
+                "custom_url_name": "立即使用",
+                "custom_url": "http://www.qq.com",
+                "custom_url_sub_title": "快递到家",
+                "promotion_url_name": "更多优惠",
+                "promotion_url": "http://www.qq.com",
+                "source": "大众点评"
+            },
+            "advanced_info": {
+                "abstract": {
+                    "abstract": "呵呵，三秒钟可以做一件不可描述的事了呢~~",
+                    "icon_url_list": [
+                        "http://mmbiz.qpic.cn/mmbiz_jpg/7uB5M2kcbcnO9U3HibicuPSfIkjyQMhZ0No6fYETpfDpYMQ4zrQIdibIjbVpmicPpomAthrSQByDp1bBZPzS9bv4RA/0"
+                    ]
+                },
+                "text_image_list": [
+                    {
+                        "image_url": "http://mmbiz.qpic.cn/mmbiz/p98FjXy8LacgHxp3sJ3vn97bGLz0ib0Sfz1bjiaoOYA027iasqSG0sjpiby4vce3AtaPu6cIhBHkt6IjlkY9YnDsfw/0",
+                        "text": ""
+                    },
+                    {
+                        "image_url": "http://mmbiz.qpic.cn/mmbiz/p98FjXy8LacgHxp3sJ3vn97bGLz0ib0Sfz1bjiaoOYA027iasqSG0sj piby4vce3AtaPu6cIhBHkt6IjlkY9YnDsfw/0",
+                        "text": ""
+                    }
+                ]
+
+
+            },
+            "gift": "时间没停下来的话，再摔次手机试试？"
+        }
+    }
+}

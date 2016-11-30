@@ -1,0 +1,16 @@
+.searchList{padding-bottom:20px;}
+.searchList .search_hd{overflow:hidden; margin-bottom:10px; display:none;}
+.searchList .search_hd a{display:block; width:25%; text-decoration:none; background-color:#fff; height:42px; line-height:42px; border-right:1px solid #f5f3f1; text-align:center; float:left; font-size:14px; box-sizing:border-box; -webkit-box-sizing:border-box;}
+.searchList .search_hd a:last-child{border-right:none;}
+.searchList .search_hd .cur{color:#eb0b30;}
+.searchList .pd_list .box_pd{display:block; text-decoration:none; padding:20px 3%; background-color:#fff; margin-bottom:2px; min-height:90px; overflow:hidden; position:relative; z-index:1;}
+.searchList .box_pd .pdImg{width:100px; height:100px; border:1px solid #ececec; position:absolute; top:20px; left:3%; z-index:1;}
+.searchList .box_pd .pd_picture{position:relative; top:50%; left:50%; transform:translate(-50%,-50%); -webkit-transform:translate(-50%,-50%);}
+.searchList .box_pd .pd_detail{margin-left:118px;}
+.searchList .box_pd .pd_name{font-size:14px; color:#333; max-height:36px; line-height:18px; overflow:hidden;}
+.searchList .box_pd .pd_merchant{color:#999; margin-top:4px;}
+.searchList .box_pd .pd_standard{color:#999; margin-top:2px;}
+.searchList .box_pd .pd_price{font-size:15px; color:#eb0b30; margin-top:8px;}
+.searchList .box_pd .payOffline{margin:0 0 0 5px;}
+/*.searchList .pd_list .box_pd .pointer{display:inline-block; width:10px; height:14px; background-image:url(../../images/common/icon-right.png); background-size:10px 14px; margin-top:37px; float:right;}*/
+.searchList .more{display:block; background-color:#d3d3d3; text-align:center; text-decoration:none; line-height:30px; margin-top:25px; box-shadow:1px 1px 1px #bbbbbb;}

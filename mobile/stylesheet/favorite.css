@@ -1,0 +1,12 @@
+.myfavorite{width:94%; min-width:300px; max-width:1024px; margin:0 3%; overflow:hidden;}
+.myfavorite li{overflow:hidden; border-bottom:1px solid #ccc;}
+.myfavorite li img{float:left; border:1px solid #dddddd; margin:0 15px 15px 0;}
+.myfavorite .icon_lt{display:inline-block; height:18px; width:18px; background:url(images/x.png) no-repeat; background-size:18px 18px; background-position:center; float:left; padding:30px 9px 27px 1%;}
+.myfavorite .pd_detail{margin-top:12px; float:left; text-decoration:none; width:90%; background:url(images/icon-right.png) no-repeat; background-size:10px 14px; background-position:right;}
+.myfavorite .pd_detail p{line-height:18px;}
+.myfavorite .pd_detail .pd_name{overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.myfavorite .pd_detail .pd_price{color:#eb0b30;}
+.myfavorite .pd_detail .pd_merchant{color:#999;}
+.myfavorite .pd_detail .icon_rt{height:14px; width:10px; display:inline-block; position:absolute;}
+.myfavorite .pd_number{margin:20px; float:right; color:#999}
+/*全部订单*/

@@ -1,0 +1,21 @@
+.wrap .allsort {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.allsort .cataList{position:absolute; width:71px; height:100%; top:0; left:0; overflow-y:scroll; z-index:1;}
+.allsort .cataItem{cursor:pointer;height:50px; color:#666; line-height:50px; text-align:center; border-bottom:1px solid #dcdcdc; box-sizing:border-box; -webkit-box-sizing:border-box;}
+.allsort .cataItem.cur{background-color:#fff; border-left:3px solid #eb0b30; color:#eb0b30; box-shadow:0px 1px 2px #ececec;}
+.allsort .cataA{display:block; line-height:50px; color:#eb0b30;}
+.allsort .cataDetail{margin-left:70px; height:100%; border-left:1px solid #dcdcdc; background-color:#fff; overflow-y:scroll; box-shadow:-1px 0px 2px #ececec;}
+.allsort .cataDetail .categoryList{display:none;}
+.allsort .cataDetail .categoryList:first-child{display:block;}
+.allsort .cataDetail .categoryItem{display:block; height:40px; line-height:40px; padding-left:30px; font-size:14px; border-bottom:1px solid #f5f3f1; background-color:#fff;}
+a:link{
+    color:#000000;
+    text-decoration: none
+}
+a:visited{
+    color:#dcdcdc;
+    text-decoration: none
+}

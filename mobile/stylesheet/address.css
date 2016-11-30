@@ -1,0 +1,45 @@
+.editAddress{width:100%; min-width:300px; max-width:1024px; padding-bottom:20px;}
+.add_Address_edit{width:100%; min-width:300px; max-width:1024px;}
+.myAddress{width:94%; min-width:300px; max-width:1024px; margin:0 3%; margin-top:20px; overflow:hidden;}
+.addressList{margin-bottom:10px;}
+.addressList li{border:1px solid #ccc;margin-bottom:10px;}
+.addressList .address_hd{background-color:#fff; padding:15px;}
+.addressList .address_hd p{font-size:14px; margin-bottom:10px; font-weight:700;}
+.addressList .address_hd span{color:#666; font-size:14px;}
+.addressList .address_hd p span{margin-left:20px; color:#333;}
+.addressList .address{border-bottom:1px solid #ccc; display:block; width:94%; padding:0 3%;  background-color:#fff; text-decoration:none; overflow:hidden;}
+.addressList .address .address_hd{background:url(images/icon-right.png) no-repeat; background-position:98% 50%; background-size:10px 14px;}
+.addressList .address_ft{height:38px; padding:0 15px; background-color:#f0f0f0;}
+.addressList .address_ft a{display:inline-block; line-height:38px; float:left; font-size:14px;}
+.addressList .address_ft .default{width:60px; height:38px; background:url(images/icon-grey-tick.jpg) no-repeat; background-size:20px 20px; background-position:0 50%; padding-left:25px; text-decoration:none; color:#666;}
+.addressList .address_ft .choice{background:url(images/icon-tick.jpg) no-repeat; background-size:20px 20px; background-position:0 50%;}
+.addressList .address_ft .revise{width:19px; height:38px; background:url(images/icon-write.jpg) no-repeat; background-size:20px 20px; background-position:0 50%; margin-left:30px;}
+/*.addressList .address_ft .delete{width:19px; height:38px; background:url(images/icon-del.jpg) no-repeat; background-size:20px 20px; background-position:0 50%; margin-left:40px;}*/
+.addressAdd{display:block; height:40px; line-height:40px; text-decoration:none; color:#666; padding:0 40px; border:1px solid #ccc; background:url(images/icon-add.jpg) no-repeat; background-size:20px 20px; background-position:15px 50%; background-color:#fff; font-size:14px;}
+.add_Address{width:94%; min-width:300px; max-width:1024px; margin:0 3%; margin-top:20px; overflow:hidden;}
+.add_Address .inputBox{border:1px solid #ccc; border-top:none;}
+.add_Address .select{border:1px solid #ccc; margin:10px 0; height:38px; position:relative; z-index:5;}
+.add_Address .inputBox input{width:100%; height:40px; padding:0 1%; border:none; border-top:1px solid #ccc; color:#666; font-size:14px;}
+.add_Address .select a{display:block; height:38px; line-height:38px; padding-left:1%; text-decoration:none; color:#666; background:url(images/icon-list.jpg) no-repeat; background-size:20px 20px; background-position:98% 50%; background-color:#fff; font-size:14px;}
+.add_Address select{
+    width:33%;
+    height:38px;
+    font-size:14px;
+    line-height:38px;
+    color:#666;
+    float:left;
+    /*position:absolute; */
+    /*left:0px; */
+    /*top:0px; */
+    opacity:0.7;
+    border:1px solid #ccc;
+    cursor:pointer;
+    /*-webkit-appearance:none;*/
+}
+select#pro{width:34%}
+.add_Address select option{height:20px; line-height:20px; font-size:14px;}
+.add_Address .textarea{border:1px solid #ccc;}
+.add_Address .textarea textarea{width:100%; height:90px; border:none; resize:none; padding:1%; color:#666; font-size:14px;}
+.add_Address .warning{color:#eb0b30; line-height:25px;font-size:14px;}
+.add_Address .b_btn{margin-top:25px; overflow:hidden;}
+.add_Address .b_btn .btn_save{width:100%; height:40px; line-height:40px; border:none; border-radius:3px; color:#fff; background-color:#eb0b30; font-size:16px;}
