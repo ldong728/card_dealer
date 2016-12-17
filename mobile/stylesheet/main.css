@@ -12,7 +12,7 @@ body, div, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, input, tex
     font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Arial;
     border-color: #939393;
     border-width: thin;
-    /*-webkit-tap-highlight-color:transparent;*/
+    -webkit-tap-highlight-color:transparent;
 
 }
 body {
@@ -30,7 +30,7 @@ a:link {
 }
 
 div {
-    /*cursor: pointer;*/
+    cursor: pointer;
     box-sizing: border-box;
 }
 

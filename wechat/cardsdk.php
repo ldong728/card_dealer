@@ -6,12 +6,10 @@ class cardsdk{
     private $appSecret;
     private $mInterfaceHander=null;
     function __construct(){
-        mylog('start create');
         $temp=new interfaceHandler(WEIXIN_ID);
         $this->mInterfaceHander= $temp;
         $this->appId = APP_ID;
         $this->appSecret = APP_SECRET;
-        mylog('construct_card');
     }
 
     private function getCardApiTicket() {
@@ -68,11 +66,11 @@ class cardsdk{
 //        mylog(getArrayInf($signPackage));
         return $signPackage;
     }
-    public function getCardExt($openId,$cardId) {
+    public function getCardExt($openid,$cardId) {
         $cardTicket=$this->getCardApiTicket();
         $timestamp=time();
         $nonceStr= $this->createNonceStr();
-        $list=array($cardTicket,$timestamp,$nonceStr,$cardId,$openId);
+        $list=array($cardTicket,$timestamp,$nonceStr,$cardId,$openid);
 //        sort($list,SORT_STRING);
 //        $str='';
 //        foreach ($list as $value) {
@@ -81,7 +79,7 @@ class cardsdk{
 //        $sign=sha1($str);
         $sign=$this->sign($list);
         return array(
-            'openid'=>$openId,
+            'openid'=>$openid,
             'timestamp'=>$timestamp,
             'nonce_str'=>$nonceStr,
             'signature'=>$sign

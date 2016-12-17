@@ -12,6 +12,79 @@ function stopLoading(){
     $('.loading').hide();
 }
 
+function handleAjaxReply(func){
+
+}
+function altTable(tablename,colname,colvalue,indexname,indexvalue,success){
+    var altValue={
+        alteTblVal: 1,
+        tbl: tablename,
+        col: colname,
+        value: colvalue,
+        index: indexname,
+        id: indexvalue,
+        pms:pms
+    };
+    $.post('ajax_request.php',altValue , function (data) {
+        if(data)data=eval('('+data+')');
+        if (data.errcode == 0) {
+            success(data);
+        }else{
+            return false;
+        }
+    })
+}
+function deleteRecord(tablename,value,success){
+    var deleteValue={
+        deleteTblVal: 1,
+        tbl: tablename,
+        value:value,
+        pms:pms
+    };
+    $.post('ajax_request.php',deleteValue , function (data) {
+        if(data)data=eval('('+data+')');
+        if (data.errcode == 0) {
+            success(data);
+        }else{
+            return false;
+        }
+    })
+}
+function addRecord(tablename,value,onDuplicate,success){
+    var insertValue={
+        addTblVal:1,
+        tbl:tablename,
+        pms:pms,
+        value:value,
+        onDuplicte:onDuplicate
+    }
+    $.post('ajax_request.php',insertValue , function (data) {
+        if(data)data=eval('('+data+')');
+        if (data.errcode == 0) {
+            success(data);
+        }else{
+            return false;
+        }
+    })
+}
+function altConfig(name,key,value,success){
+    var conValue={
+        altConfig:1,
+        name:name,
+        key:key,
+        value:value,
+        pms:pms
+    }
+    $.post('ajax_request.php',conValue , function (data) {
+        if(data)data=eval('('+data+')');
+        if (data.errcode == 0) {
+            success(data);
+        }else{
+            return false;
+        }
+    })
+}
+
 //例：<div class="ipt-toggle" id="row id" data-tbl="table name"data-col="col name" data-index="index col">
 $('.ipt-toggle').dblclick(function () {
     var id = $(this).attr('id');
@@ -28,6 +101,7 @@ $('.ipt-area-toggle').dblclick(function () {
     $(this).html(content)
 });
 $(document).on('change', '.ipt', function () {
+    console.log('change');
     var input = $(this);
     var value = $(this).val();
     var id = $(this).attr('id').slice('3');
@@ -39,19 +113,27 @@ $(document).on('change', '.ipt', function () {
         index = col;
         id = replace;
     }
-    $.post('ajax_request.php', {
-        alteTblVal: 1,
-        tbl: tbl,
-        col: col,
-        value: value,
-        index: index,
-        id: id
-    }, function (data) {
-        if (data > 0) {
-            input.parent().text(value);
-            input.remove();
-        }else{
-            //alert(data);
-        }
+    altTable(tbl,col,value,index,id,function(){
+        input.parent().text(value);
+        input.remove();
     })
-})
+
+
+    //var altValue={
+    //    alteTblVal: 1,
+    //    tbl: tbl,
+    //    col: col,
+    //    value: value,
+    //    index: index,
+    //    id: id,
+    //    pms:pms
+    //};
+    //$.post('ajax_request.php',altValue , function (data) {
+    //    if(data)data=eval('('+data+')');
+    //    if (data.errcode == 0) {
+    //        input.parent().text(value);
+    //        input.remove();
+    //    }else{
+    //    }
+    //})
+});

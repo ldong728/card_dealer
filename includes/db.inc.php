@@ -48,7 +48,7 @@ function pdoQuery($tableName, $fields, $where, $append)
         $sql = $sql . ' WHERE ';
         $j = 0;
         foreach ($where as $k => $v) {
-            if($v==null){
+            if($v===null){
                 $sql.=$k.' in("-1000000")';
                 $j++;
                 continue;

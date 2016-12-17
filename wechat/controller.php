@@ -1,13 +1,11 @@
 <?php
-
 include_once '../includePackage.php';
 include_once $GLOBALS['mypath'].'/wechat/interfaceHandler.php';
 include_once $GLOBALS['mypath'].'/wechat/wechat.php';
 include_once $GLOBALS['mypath'].'/wechat/reply.php';
+//mylog($_SERVER['QUERY_STRING']);
 $weixin=new wechat(WEIXIN_ID);
 $weixin->valid();
-include_once $GLOBALS['mypath'].'/wechat/serveManager.php';
-$myHandler=new interfaceHandler(WEIXIN_ID);
 $msg=$weixin->receiverFilter();
 $random=rand(1000,9999);
 $eventList=array
@@ -21,12 +19,9 @@ $eventList=array
     'subscribe'
 
 );
-mylog(getArrayInf($msg));
+
 if(in_array($msg['MsgType'],array('text','voice','img'))){
-//    mylog('inmsgType');
     normalReply($weixin,$msg);
-//    mylog('normalReply');
-//            exit;
 
 }
 
@@ -36,7 +31,6 @@ if($msg['MsgType']=='event'){
         $msg['Event']($msg);
     }
 }
-
 echo 'success';
 exit;
 

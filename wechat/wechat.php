@@ -4,30 +4,33 @@
  * User: godlee
  * Date: 2015/4/17
  * Time: 8:31
+ * version:1.2
+ * 支持接收发送加密信息
  */
 
 //define("TOKEN", "godlee");
 
+
 class wechat
 {
+    private $cypt;
     public $weixinId='';
     public $msg;
     private $isReplied=false;
     public function __construct($wxid){
+
         $this->weixinId=$wxid;
+        if(AES){
+            include_once 'aes/wxBizMsgCrypt.php';
+            $this->cypt=new WXBizMsgCrypt(TOKEN,ENCODE_KEY,APP_ID);
+        }
 }
 
     public function valid()  //微信服务器验证配置用
     {
-//        wxlog('valid start');
         if (isset($_GET['echostr'])) {
-//            mylog($_GET['signature']);
-//            mylog($_GET['timestamp']);
-//            mylog($_GET['nonce']);
-//            mylog($_GET['echostr']);
             $echoStr = $_GET["echostr"];
             if ($this->checkSignature()) {
-//                mylog($echoStr);
                 echo $echoStr;
                 exit;
             }
@@ -36,7 +39,14 @@ class wechat
     public function receiverFilter()
     {
         if(isset($GLOBALS["HTTP_RAW_POST_DATA"])) {
-            $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+//            mylog($GLOBALS["HTTP_RAW_POST_DATA"]);
+            $postStr='';
+            if(AES){
+                $stu=$this->cypt->decryptMsg($_GET['msg_signature'],$_GET['timestamp'],$_GET['nonce'],$GLOBALS["HTTP_RAW_POST_DATA"],$postStr);
+            }else{
+                $postStr= $GLOBALS["HTTP_RAW_POST_DATA"];
+            }
+//            mylog($postStr);
             if (!empty($postStr)) {
                 libxml_disable_entity_loader(true);
                 $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -47,6 +57,7 @@ class wechat
                     $msg[$child->getName()] = (string)$child;
                 }
                 $this->msg = $msg;
+
                 return $msg;
             }
         }else{
@@ -54,7 +65,7 @@ class wechat
         }
     }
 
-    public function prepareTextMsg($sentTo, $me, $content)
+    public function prepareTextMsg($content)
     {
         $con=array('MsgType'=>'text','Content'=>$content);
         $resultStr=$this->prepareMsg($con);
@@ -72,11 +83,11 @@ class wechat
     public function replyMsg(array $content){
         if(!$this->isReplied) {
             $replyStr = $this->prepareMsg($content);
-//            mylog($replyStr);
             echo $replyStr;
             $this->isReplied=true;
         }
     }
+
 
     private function prepareMsg(array $content){
         $textTpl = '<?xml version="1.0" encoding="utf-8"?><xml>
@@ -87,6 +98,7 @@ class wechat
         $xml=new SimpleXMLElement($textTpl);
         $this->arrayToXml($xml,$content);
         $replyStr=$xml->asXML();
+        $replyStr=$this->encryptMsg($replyStr);
         return $replyStr;
     }
     private function arrayToXml(SimpleXMLElement $xml, array $array){
@@ -99,6 +111,19 @@ class wechat
         }
         return $xml;
 
+    }
+    private function encryptMsg($msg){
+        if(AES){
+            $encMsg='';
+//            mylog('encryp');
+//            mylog($msg);
+            $r=$this->cypt->encryptMsg($msg,time(),$_GET['nonce'],$encMsg);
+//            mylog($r);
+//            mylog($encMsg);
+            return $encMsg;
+        }else{
+            return $msg;
+        }
     }
     public function replytext($response){
         if(!$this->isReplied) {

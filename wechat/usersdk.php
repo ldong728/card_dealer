@@ -10,16 +10,16 @@ include_once 'interfaceHandler.php';
 class usersdk
 {
 
-    private $openId;
+    private $openid;
 
-    public function __construct($openId)
+    public function __construct($openid)
     {
-        $this->openId = $openId;
+        $this->openid = $openid;
     }
 
     public function getUserInf()
     {
-        $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=' . $this->openId . '&lang=zh_CN';
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=' . $this->openid . '&lang=zh_CN';
         $jsonData = interfaceHandler::getHandler()->getByCurl($url);
         $inf = json_decode($jsonData, true);
         if(!isset($inf['errcode'])){
@@ -41,7 +41,7 @@ class usersdk
 
     public function syncUserInf($userTblName){
 //        if(isset)
-        $userInfLocal=pdoQuery($userTblName,null,array('openid'=>$this->openId),' limit 1');
+        $userInfLocal=pdoQuery($userTblName,null,array('openid'=>$this->openid),' limit 1');
         $userInfLocal=$userInfLocal->fetch();
         if(!$userInfLocal||($userInfLocal['update_time']+3600*24)<time()){
             if($inf=$this->getUserInf()){
@@ -63,19 +63,19 @@ class usersdk
 
     public function addTag($tagId)
     {
-        $openidList = [$this->openId];
+        $openidList = [$this->openid];
         return usersdk::batchAddTag($tagId, $openidList);
     }
 
     public function removeTag($tagId)
     {
-        $openidList = [$this->openId];
+        $openidList = [$this->openid];
         return usersdk::batchremoveTag($tagId, $openidList);
     }
 
     public function getUserTag()
     {
-        $data = array('openid' => $this->openId);
+        $data = array('openid' => $this->openid);
         $back = interfaceHandler::getHandler()->postArrayByCurl('https://api.weixin.qq.com/cgi-bin/tags/getidlist?access_token=ACCESS_TOKEN', $data);
         return json_decode($back, true);
     }

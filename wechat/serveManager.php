@@ -88,32 +88,32 @@ function chooseKF($kf='default'){
     }
     return $kfAc;
 }
-function connectKF($openId,$kfAc,$remark){
+function connectKF($openid,$kfAc,$remark){
     $linkinf=array(
         'kf_account'=>$kfAc,
-        'openid'=>$openId,
+        'openid'=>$openid,
         'text'=>$remark
     );
     $request=$GLOBALS['mInterface']->postArrayByCurl('https://api.weixin.qq.com/customservice/kfsession/create?access_token=ACCESS_TOKEN',$linkinf);
     return $request;
 }
-function linkKf($openId,$kf='default',$remark='用户从网页接入'){
+function linkKf($openid,$kf='default',$remark='用户从网页接入'){
 //    $inf=getOnlineKfList();
 //    $inf=json_decode($inf,true);
     $return=0;
     if($kfAc=chooseKF($kf)){
-        $request=connectKF($openId,$kfAc,$remark);
+        $request=connectKF($openid,$kfAc,$remark);
         $request=json_decode($request,true);
         if($request['errcode']==0){
-            sendKFMessage($openId,'已为您接入人工客服，请稍候');
+            sendKFMessage($openid,'已为您接入人工客服，请稍候');
             $return=0;
         }else{
-            sendKFMessage($openId,'客服不在线或者忙碌中，请稍候再试');
+            sendKFMessage($openid,'客服不在线或者忙碌中，请稍候再试');
             $return=1;
         }
 
     }else{
-        sendKFMessage($openId,'当前无在线客服，请稍候再试');
+        sendKFMessage($openid,'当前无在线客服，请稍候再试');
         $return=2;
     }
     return $return;
@@ -158,9 +158,9 @@ function downloadImgToHost($media_id,$filePath)
     file_put_contents($filePath, $imgData);
     return 'ok';
 }
-function getUnionId($openId)
+function getUnionId($openid)
 {
-    $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=' . $openId . '&lang=zh_CN';
+    $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=' . $openid . '&lang=zh_CN';
     $jsonData = $GLOBALS['mInterface']->getByCurl($url);
     $inf=json_decode($jsonData,true);
     if(!isset($inf['nickname'])||$inf['nickname']==''){
@@ -173,9 +173,9 @@ function getUnionId($openId)
 }
 
 function getUserInfByToken($data){
-    $openId=$data['openid'];
+    $openid=$data['openid'];
     $token=$data['access_token'];
-    $url='https://api.weixin.qq.com/sns/userinfo?access_token='.$token.'&openid='.$openId.'&lang=zh_CN';
+    $url='https://api.weixin.qq.com/sns/userinfo?access_token='.$token.'&openid='.$openid.'&lang=zh_CN';
     $jsonData=$GLOBALS['mInterface']->getByCurl($url);
     return $jsonData;
 

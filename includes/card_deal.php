@@ -59,7 +59,7 @@ function init()
     $_SESSION['smq'] = $smq;
 }
 function getOrderStu($index){
-    $list=array('待付款','处理中','已付款','已领取','已取消','已过期');
+    $list=array('待付款','处理中','已付款','已领取','已取消','已过期','支付出错');
     return $list[$index];
 }
 function setOrderStu($orderId,$stu,$operator=-1,$paymode=0){

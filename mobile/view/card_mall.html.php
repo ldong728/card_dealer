@@ -7,6 +7,7 @@
 <body>
 <div class="wrap">
     <?php foreach($cardList as $row):?>
+        <?php mylog(getArrayInf($row))?>
     <div class="table bord_size">
         <div class="table_1 left_space"><?php echo $row['card_title'] ?></div>
         <div class="table_2 left_space">零售价:<?php echo $row['price']?>元</div>
@@ -18,6 +19,8 @@
 <script>
     $('.button_box').click(function(){
         var card_id=this.id;
+        window.location.href='?module=card_order&card_id='+card_id;
+
 //        alert(card_id);
     });
 </script>
