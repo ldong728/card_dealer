@@ -17,23 +17,23 @@
 define('ADMIN','hll');
 define('PASSWORD','admin');
 ////以下为测试号专用
-//define('APP_ID','wx03393af10613da23');
-//define('APP_SECRET','40751854901cc489eddd055538224e8a');
-//define('WEIXIN_ID','gh_964192c927cb');
-//define('MCH_ID','now is null');
-//define('KEY','now is null');
-//define('AES',false);
-//define('ENCODE_KEY','aJXVYzQ9N4KMijdo0rpAo0iwKyw4WQr2WHFaXt9lNIy');
+define('APP_ID','wx03393af10613da23');
+define('APP_SECRET','40751854901cc489eddd055538224e8a');
+define('WEIXIN_ID','gh_964192c927cb');
+define('MCH_ID','now is null');
+define('KEY','now is null');
+define('AES',false);
+define('ENCODE_KEY','aJXVYzQ9N4KMijdo0rpAo0iwKyw4WQr2WHFaXt9lNIy');
 
 
 //以下为gooduo网络支付测试专用
-define('APP_ID','wx148e8bf82333c4f8');
-define('APP_SECRET','a3a20611f28435b167db7f0d141b96ca');
-define('WEIXIN_ID','gh_ddf169a00667');
-define('MCH_ID','');
-define('KEY','');
-define('AES',true);
-define('ENCODE_KEY','fpze06HXzAuimYRyJcVGP3PlTkkDMMCmKswYDYlkdgL');
+//define('APP_ID','wx148e8bf82333c4f8');
+//define('APP_SECRET','a3a20611f28435b167db7f0d141b96ca');
+//define('WEIXIN_ID','gh_ddf169a00667');
+//define('MCH_ID','');
+//define('KEY','');
+//define('AES',true);
+//define('ENCODE_KEY','fpze06HXzAuimYRyJcVGP3PlTkkDMMCmKswYDYlkdgL');
 
 define("TOKEN", "godlee");
 define('DOMAIN',"/card_dealer");

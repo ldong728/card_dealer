@@ -17,6 +17,7 @@ if(isset($_SESSION['openid'])){
             $_GET['module']();
             exit;
         }
+
         switch($_GET['module']){
             case 'card_mall':
                 $cardid='pubtTtwIDpuhWcvKtOW0e9Dj01Ig';
@@ -54,7 +55,6 @@ if(isset($_SESSION['openid'])){
                 echo 'ok';
                 break;
         }
-
         exit;
         }
 
@@ -124,6 +124,21 @@ function card_order(){
 //    mylog('card_order reached '.$cardId);
     include 'view/card_detail.html.php';
 //    echo 'ok,card_id='.$cardId;
+}
+function card_bought_list(){//进入已购买但未领取列表
+    mylog();
+    global $card;
+    $query=pdoQuery('card_order_tbl',null,array('open_id'=>$_SESSION['openid']),' limit 5');
+
+    for($i=0;$i<5&&$row=$query->fetch();$i++){
+        mylog();
+        for($j=0;$j<($row['number']-$row['getted'])&&$i<5;$j++){
+            mylog();
+            $cardInfList[]=array('id'=>$row['card_id'],'ext'=>json_encode($card->getCardExt($_SESSION['openid'],$row['card_id'],(string)$row['card_order_id'])));//将14位长订单号放入随机字串中
+            $i++;
+        }
+    }
+    include 'view/get_card_view.html.php';
 
 }
 

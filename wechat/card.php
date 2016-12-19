@@ -7,6 +7,8 @@
  */
 class card {
     private $cardType;
+    private $cardId;
+    private $cardCode;
 
     function __construct(){
 

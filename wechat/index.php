@@ -35,7 +35,7 @@ if(isset($_GET['state'])&&isset($_SESSION['oauthType'])){//从授权页跳转至
         if('snsapi_userinfo'==$_SESSION['oauthType']){
             //TODO 获取用户数据的操作
         }else{
-            $_SESSION['userInf']=getUnionId($_SESSION['openid']);
+//            $_SESSION['userInf']=getUnionId($_SESSION['openid']);
         }
         switch($_GET['state']){
             default:

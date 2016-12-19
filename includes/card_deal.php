@@ -59,7 +59,11 @@ function init()
     $_SESSION['smq'] = $smq;
 }
 function getOrderStu($index){
-    $list=array('待付款','处理中','已付款','已领取','已取消','已过期','支付出错');
+    $list=array('待付款','处理中','已付款','已领取','已删除','已过期','支付出错');
+    return $list[$index];
+}
+function getCardStu($index){
+    $list=array("正常","转赠中","核销中","已核销","已过期","已删除","异常");
     return $list[$index];
 }
 function setOrderStu($orderId,$stu,$operator=-1,$paymode=0){
@@ -190,9 +194,9 @@ function getWechatMode($customerId){
     }
     return $mode;
 }
-function updateWechatMode($customerId,$mode){
-    pdoUpdate('wechat_mode_tbl',array('mode'=>$mode),array('c_id'=>$customerId));
-}
+//function updateWechatMode($customerId,$mode){
+//    pdoUpdate('wechat_mode_tbl',array('mode'=>$mode),array('c_id'=>$customerId));
+//}
 function getConfig($path){
     $data=file_get_contents($path);
     return json_decode($data,true);

@@ -2,23 +2,22 @@
 include_once  $GLOBALS['mypath']. '/wechat/interfaceHandler.php';
 
 class cardsdk{
-    private $appId;
-    private $appSecret;
-    private $mInterfaceHander=null;
+//    private $appId;
+//    private $appSecret;
+//    private $mInterfaceHander=null;
     function __construct(){
-        $temp=new interfaceHandler(WEIXIN_ID);
-        $this->mInterfaceHander= $temp;
-        $this->appId = APP_ID;
-        $this->appSecret = APP_SECRET;
+//        $temp=new interfaceHandler(WEIXIN_ID);
+//        $this->mInterfaceHander= $temp;
+//        $this->appId = APP_ID;
+//        $this->appSecret = APP_SECRET;
     }
-
     private function getCardApiTicket() {
         // jsapi_ticket 应该全局存储与更新，以下代码以写入到文件中做示例
         $data = json_decode(file_get_contents($GLOBALS['mypath'].'/tokens/card_api_ticket.dat'));
         if ($data->expire_time < time()) {
-            $this->mInterfaceHander->reflashAccessToken();
+            interfaceHandler::getHandler()->reflashAccessToken();
             $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=wx_card";
-            $temptoken=$this->mInterfaceHander->getByCurl($url);
+            $temptoken=interfaceHandler::getHandler()->getByCurl($url);
             $res = json_decode($temptoken);
             $ticket = $res->ticket;
             if ($ticket) {
@@ -43,18 +42,9 @@ class cardsdk{
 
     public function getSignPackage($cardType) {
         $cardapiTicket = $this->getCardApiTicket();
-//        mylog('ticket: '.$cardapiTicket);
-//        mylog('appid: '.$this->appId);
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
-//        $appId= $this->appId;
-        $list=array($cardapiTicket,$timestamp,$nonceStr,$this->appId,$cardType);
-//        sort($list,SORT_STRING);
-//        $str='';
-//        foreach ($list as $value) {
-//            $str.=$value;
-//        }
-//        $cardSign=sha1($str);
+        $list=array($cardapiTicket,$timestamp,$nonceStr,APP_ID,$cardType);
         $cardSign=$this->sign($list);
 
         $signPackage = array(
@@ -66,17 +56,12 @@ class cardsdk{
 //        mylog(getArrayInf($signPackage));
         return $signPackage;
     }
-    public function getCardExt($openid,$cardId) {
+    public function getCardExt($openid,$cardId,$extra) {
         $cardTicket=$this->getCardApiTicket();
         $timestamp=time();
-        $nonceStr= $this->createNonceStr();
+        $extraLength=31-strlen($extra);
+        $nonceStr= $extra.$this->createNonceStr($extraLength);
         $list=array($cardTicket,$timestamp,$nonceStr,$cardId,$openid);
-//        sort($list,SORT_STRING);
-//        $str='';
-//        foreach ($list as $value) {
-//            $str.=$value;
-//        }
-//        $sign=sha1($str);
         $sign=$this->sign($list);
         return array(
             'openid'=>$openid,
@@ -89,15 +74,46 @@ class cardsdk{
     public function requestCardList($status='CARD_STATUS_NOT_VERIFY',$offset=0,$count=20){
 
         $data=array('offset'=>$offset,'count'=>$count,'status_list'=>$status);
-        $re=$this->mInterfaceHander->postArrayByCurl('https://api.weixin.qq.com/card/batchget?access_token=ACCESS_TOKEN',$data);
+        $re=interfaceHandler::getHandler()->postArrayByCurl('https://api.weixin.qq.com/card/batchget?access_token=ACCESS_TOKEN',$data);
         return $re;
     }
     public function requestCardInf($cardId,$returnAsArray=false){
         $data=array('card_id'=>$cardId);
-        $re=$this->mInterfaceHander->postArrayByCurl('https://api.weixin.qq.com/card/get?access_token=ACCESS_TOKEN',$data);
+        $re=interfaceHandler::getHandler()->postArrayByCurl('https://api.weixin.qq.com/card/get?access_token=ACCESS_TOKEN',$data);
         if(!$returnAsArray)return $re;
         else return json_decode($re,true);
     }
+    public function encodeCardCode($encryptCode){
+        $encryptCode=array('encrypt_code'=>$encryptCode);
+        $data=interfaceHandler::getHandler()->postArrayByCurl('https://api.weixin.qq.com/card/code/decrypt?access_token=ACCESS_TOKEN',$encryptCode);
+        $data=json_decode($data,true);
+        if(0==$data['errcode']){
+            return $data['code'];
+        }else{
+            return null;
+        }
+    }
+    public function checkCard($cardCode,$check_detail=false){
+        $data=array('code'=>$cardCode,'check_consume'=>$check_detail);
+        $re=interfaceHandler::getHandler()->postArrayByCurl('https://api.weixin.qq.com/card/code/get?access_token=ACCESS_TOKEN',$data);
+        $re=json_decode($re,true);
+        if($check_detail)return $re;
+        else{
+            return $re['can_consume'];
+        }
+    }
+    public function consumeCard($cardCode){
+        if($this->checkCard($cardCode)){
+            $data=array('code'=>$cardCode);
+            $re=interfaceHandler::getHandler()->postArrayByCurl('https://api.weixin.qq.com/card/code/consume?access_token=ACCESS_TOKEN',$data);
+            $re=json_decode($re,true);
+            if(0==$re['errcode'])return true;
+            else return false;
+        }
+        return false;
+    }
+
+
 
 
     private function sign($list){
@@ -108,6 +124,7 @@ class cardsdk{
         }
         return sha1($str);
     }
+
 
 
 }

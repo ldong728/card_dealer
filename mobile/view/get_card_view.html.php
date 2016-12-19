@@ -21,7 +21,6 @@
 
                 ], // 需要添加的卡券列表
                 success: function (res) {
-
                     var cardList = res.cardList; // 添加的卡券列表信息
 //                    alert(cardList);
                 },
@@ -36,5 +35,4 @@
 
     );
 
-    alert('ok');
 </script>

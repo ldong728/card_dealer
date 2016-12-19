@@ -4,9 +4,8 @@
 function normalReply($weixin, $msg)
 {
     mylog('nomal reply');
-   $weixin->replytext('收到');
+    $weixin->replytext('收到');
     exit;
-
 }
 
 
