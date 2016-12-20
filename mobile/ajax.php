@@ -7,8 +7,9 @@
  */
 include_once '../includePackage.php';;
 session_start();
+
 if(isset($_SESSION['openid'])){
-        if('pay'==substr($_POST['module'],0,3)){
+        if(isset($_POST['module'])&&'pay'==substr($_POST['module'],0,3)){
             include_once '../wechat/wxPay.php';
         }
         switch($_POST['module']){
@@ -47,5 +48,32 @@ function pay_pre(){
         echo ajaxBack(null,6,$data);
     }
 
+
+}
+function get_card(){
+    include_once '../wechat/cardsdk.php';
+    mylog(json_encode($_POST));
+    $cardList=$_POST['cardList'];
+    $value=array();
+    $card=new cardsdk();
+
+    foreach ($cardList as $row) {
+        $code=$card->encodeCardCode($row['card_code']);
+        $value[]=array('card_order_id'=>$row['order_id'],'card_id'=>$row['card_id'],'card_code'=>$code?$code:$row['card_code'],'open_id'=>$_SESSION['openid'],'original_id'=>$_SESSION['openid']);
+    }
+    pdoTransReady();
+    try{
+        pdoBatchInsert('card_user_tbl',$value);
+        foreach ($_POST['getedCount'] as $k=>$value) {
+            $str=' update card_order_tbl set getted=getted+'.$value.' where card_order_id="'.$k.'"';
+            exeNew($str);
+        }
+        pdoCommit();
+        echo ajaxBack();
+    }catch(PDOException $e){
+        mylog($e->getMessage());
+        pdoRollBack();
+        echo ajaxBack(null,9,'数据库错误');
+    }
 
 }

@@ -64,6 +64,28 @@ if(isset($_SESSION['openid'])){
     }
 }
 
+if(isset($_GET['consume_online'])){
+    include_once '../wechat/cardsdk.php';
+    $cardsdk=new cardsdk();
+    $encrypt_code=$_GET['encrypt_code'];
+//    mylog($encrypt_code);
+//    $encrypt_code=urldecode($encrypt_code);
+//    mylog($encrypt_code);
+    $code=$cardsdk->encodeCardCode($encrypt_code);
+    if($code){
+        $openid=$_GET['openid'];
+        $cardid=$_GET['card_id'];
+        $cardrecorder=pdoQuery('card_user_tbl',array('card_user_id'),array('card_code'=>$code,'open_id'=>$openid),' limit 1');
+        if($cardrecorder->fetch()){
+            $addrQuery=pdoQuery('address_tbl',null,array('open_id'=>$openid),' limit 5');
+            $addrlist=$addrQuery->fetchAll();
+            if(!$addrlist)$addrlist=array();
+            include "view/address.html.php";
+        }
+
+    }
+}
+
 if (isset($GLOBALS["HTTP_RAW_POST_DATA"])) {
     $tmpmsg = array(
         'touser' => $to,
@@ -126,14 +148,11 @@ function card_order(){
 //    echo 'ok,card_id='.$cardId;
 }
 function card_bought_list(){//进入已购买但未领取列表
-    mylog();
     global $card;
     $query=pdoQuery('card_order_tbl',null,array('open_id'=>$_SESSION['openid']),' limit 5');
 
     for($i=0;$i<5&&$row=$query->fetch();$i++){
-        mylog();
         for($j=0;$j<($row['number']-$row['getted'])&&$i<5;$j++){
-            mylog();
             $cardInfList[]=array('id'=>$row['card_id'],'ext'=>json_encode($card->getCardExt($_SESSION['openid'],$row['card_id'],(string)$row['card_order_id'])));//将14位长订单号放入随机字串中
             $i++;
         }

@@ -11,7 +11,7 @@ $signPackage = $jssdk->GetSignPackage();
     <script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script>
     wx.config({
-        debug: true,
+        debug:false,
         appId: '<?php echo $signPackage["appId"];?>',
         timestamp: <?php echo $signPackage["timestamp"];?>,
         nonceStr: '<?php echo $signPackage["nonceStr"];?>',
@@ -28,7 +28,8 @@ $signPackage = $jssdk->GetSignPackage();
             'chooseWXPay',
             'chooseCard',
             'addCard',
-            'openCard'
+            'openCard',
+            'closeWindow',
         ]
     });
 //    wx.ready(function(){

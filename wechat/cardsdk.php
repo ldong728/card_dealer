@@ -90,6 +90,7 @@ class cardsdk{
         if(0==$data['errcode']){
             return $data['code'];
         }else{
+            mylog('encrypt error:'.$data['errcode'].' :'.$data['errmsg']);
             return null;
         }
     }

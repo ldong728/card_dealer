@@ -1,5 +1,6 @@
 <?php
 /*20160512 支持事务操作
+ *20161220
  *
  */
 
@@ -298,12 +299,17 @@ function pdoBatchInsert($tableName,array $value,$str=''){
         $sql=$sql.$str;
     }
     $p=$GLOBALS['pdo']->prepare($sql);
-    foreach ($value as $data) {
-        foreach ($data as $k=>$v) {
-            $p->bindValue($k,$v);
+    try{
+        foreach ($value as $data) {
+            foreach ($data as $k=>$v) {
+                $p->bindValue($k,$v);
+            }
+            $p->execute();
         }
-        $p->execute();
+    }catch(PDOException $e){
+        throw $e;
     }
+
 
 
 }
