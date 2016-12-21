@@ -17,7 +17,42 @@ if(isset($_SESSION['openid'])){
                 $_POST['module']();
                 break;
         }
+}
+if(isset($_SESSION['consume_inf'])){
+    if(isset($_POST['addr'])){
+        $_POST['addr']();
+    }
+}
+function addr_count(){
+    $count=pdoQuery('address_tbl',array('count(*) as count'),array('open_id'=>$_SESSION['consume_inf']['openid']),null);
+    $count=$count->fetch();
+    echo ajaxBack($count['count']);
+}
+function addr_edit(){
+    $id=$_POST['id'];
+    $query=pdoQuery('address_tbl',null,array('id'=>$id),' limit 1');
+    $query=$query->fetch();
+    echo ajaxBack($query);
 
+}
+function add_addr(){
+    $value=$_POST['data'];
+    $value['open_id']=$_SESSION['consume_inf']['openid'];
+    pdoInsert('address_tbl',$value,'update');
+    echo ajaxBack();
+}
+function set_addr_default(){
+    pdoTransReady();
+    try{
+        pdoUpdate('address_tbl',array('dft_a'=>0),array('open_id'=>$_SESSION['consume_inf']['openid']));
+        pdoUpdate('address_tbl',array('dft_a'=>1),array('id'=>$_POST['id']),' limit 1');
+        pdoCommit();
+        echo ajaxBack();
+    }catch(PDOException $e){
+        mylog($e->getMessage());
+        pdoRollBack();
+        echo ajaxBack(null,9,'数据库错误');
+    }
 }
 function pay_pre(){
     mylog('pay_pre');

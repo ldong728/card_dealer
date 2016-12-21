@@ -27,3 +27,14 @@ function loading(){
 function stopLoading(){
     $('.loading').hide();
 }
+function backHandle(data){
+     var re=eval('('+data+')');
+    if(0==re.errcode){
+        var state= null==re.data?true:re.data;
+        console.log(state);
+        return state;
+    }else{
+        console.log('error: '+re.errmsg);
+        return false;
+    }
+}
