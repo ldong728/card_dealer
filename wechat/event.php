@@ -39,7 +39,8 @@ function user_del_card($msg){
     return;
 }
 function user_consume_card($msg){
-
+    $card_code=$msg['UserCardCode'];
+    pdoUpdate('card_user_tbl',array('status'=>3),array('card_code'=>$card_code));
     return;
 }
 function user_gifting_card($msg){

@@ -8,7 +8,7 @@
         <ul class="addressList">
             <?php foreach($addrlist as $row):?>
             <li id="li<?php echo $row['id']?>">
-                <a class="address"href="controller.php?settleAccounts=1&addressId=<?php echo $row['id']?>&from=<?php echo $to?>">
+                <a class="address" href="controller.php?action=consume_online&address_id=<?php echo $row['id']?>">
                     <div class="address_hd">
                         <p>
                             <?php htmlout( $row['name'])?>

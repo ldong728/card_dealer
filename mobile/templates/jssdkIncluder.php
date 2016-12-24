@@ -29,7 +29,8 @@ $signPackage = $jssdk->GetSignPackage();
             'chooseCard',
             'addCard',
             'openCard',
-            'closeWindow',
+            'scanQRCode',
+            'closeWindow'
         ]
     });
 //    wx.ready(function(){

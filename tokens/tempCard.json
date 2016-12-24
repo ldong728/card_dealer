@@ -6,15 +6,15 @@
                 "logo_url":  "http://mmbiz.qpic.cn/mmbiz_jpg/7uB5M2kcbcnCMlNDJiaGbtqlYLr5e6WRY9lHyiatV3xxk1Nu6J1bDXh73qiaj9ZS5NORRc2lCF7K8hbBkiabw14Zxg/0",
                 "brand_name": "谷多网络",
                 "code_type": "CODE_TYPE_ONLY_BARCODE",
-                "title": "外链测试券",
-                "sub_title": "凭此券可免费停止时间--3秒",
+                "title": "核动力航母兑换券",
+                "sub_title": "凭此券可兑换航母一艘",
                 "color": "Color030",
                 "notice": "使用时请将手机用力往地上摔",
                 "service_phone": "020-88888888",
                 "description": "描述，description字段",
                 "date_info": {
                     "type": "DATE_TYPE_FIX_TERM",
-                    "fixed_term": 5,
+                    "fixed_term": 365,
                     "fixed_begin_term": 0
                 },
                 "sku": {

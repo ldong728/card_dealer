@@ -8,13 +8,14 @@ include_once $GLOBALS['mypath'].'/wechat/usersdk.php';
 include_once $GLOBALS['mypath'].'/wechat/serveManager.php';
 
 session_start();
-if(isset($_GET['oauth'])&&!isset($_SESSION['openid'])){
+if(!isset($_GET['code'])&&!isset($_SESSION['openid'])){
     session_unset();
+    $oauthType=$_GET['oauth']?$_GET['oauth']:'snsapi_base';
     //getparam:oauth&diract
     $diract=urlencode(str_replace('diract=','',strchr($_SERVER['QUERY_STRING'],'diract=')));//保存diract参数后的所有参数并传递
     if($diract=='')$diract='none';
-    $oauth=new oauth($_GET['oauth'],$diract);
-    $_SESSION['oauthType']=$_GET['oauth'];
+    $oauth=new oauth($oauthType,$diract);
+    $_SESSION['oauthType']=$oauthType;
     $oauth->getOauth();
     exit;
 }elseif(isset($_SESSION['openid'])){
@@ -24,7 +25,6 @@ if(isset($_GET['oauth'])&&!isset($_SESSION['openid'])){
     $_SESSION['user_level']=$userInf['user_level'];
     header('location:../mobile/controller.php?module='.$diract);
 }
-
 if(isset($_GET['state'])&&isset($_SESSION['oauthType'])){//从授权页跳转至此
     if(isset($_GET['code'])){
         $userId=oauth::getOauthToken($_GET['code']);

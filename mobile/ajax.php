@@ -5,9 +5,21 @@
  * Date: 2015/10/26
  * Time: 13:09
  */
-include_once '../includePackage.php';;
+include_once '../includePackage.php';
+include_once '../wechat/cardsdk.php';
 session_start();
 
+if(isset($_SESSION['consume_inf'])){
+    if(isset($_POST['addr'])){
+        $_POST['addr']();
+        exit;
+    }
+}
+if(isset($_SESSION['operator'])){
+    $func='op_'.$_POST['action'];
+    $func();
+    exit;
+}
 if(isset($_SESSION['openid'])){
         if(isset($_POST['module'])&&'pay'==substr($_POST['module'],0,3)){
             include_once '../wechat/wxPay.php';
@@ -18,9 +30,21 @@ if(isset($_SESSION['openid'])){
                 break;
         }
 }
-if(isset($_SESSION['consume_inf'])){
-    if(isset($_POST['addr'])){
-        $_POST['addr']();
+
+
+function op_consume(){
+    $code=$_POST['data'];
+    mylog($code);
+    $inf=pdoQuery('card_user_view',array('card_id'),array('card_code'=>$code,'partner_id'=>$_SESSION['operator']['partner_id']),' limit 1');
+    if($inf=$inf->fetch()){
+        mylog();
+        $_SESSION['operator']['current_cardid']=$inf['card_id'];
+        if(cardConsume($code,'local',$_SESSION['operator']['id'])){
+            echo ajaxBack();
+        }else{
+            echo ajaxBack(null,5,'服务器故障');
+        }
+
     }
 }
 function addr_count(){
