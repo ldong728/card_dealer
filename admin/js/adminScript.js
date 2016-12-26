@@ -11,7 +11,6 @@ function loading(){
 function stopLoading(){
     $('.loading').hide();
 }
-
 function handleAjaxReply(func){
 
 }
@@ -28,9 +27,9 @@ function altTable(tablename,colname,colvalue,indexname,indexvalue,success){
     $.post('ajax_request.php',altValue , function (data) {
         if(data)data=eval('('+data+')');
         if (data.errcode == 0) {
-            success(data);
+           success(data);
         }else{
-            return false;
+          return false;
         }
     })
 }

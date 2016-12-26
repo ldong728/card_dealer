@@ -116,13 +116,13 @@ function get_card(){
     $value=array();
     $card=new cardsdk();
 
-    foreach ($cardList as $row) {
-        $code=$card->encodeCardCode($row['card_code']);
-        $value[]=array('card_order_id'=>$row['order_id'],'card_id'=>$row['card_id'],'card_code'=>$code?$code:$row['card_code'],'open_id'=>$_SESSION['openid'],'original_id'=>$_SESSION['openid']);
-    }
+
     pdoTransReady();
     try{
-        pdoBatchInsert('card_user_tbl',$value);
+        foreach ($cardList as $row) {
+            $code=$card->encodeCardCode($row['card_code']);
+            pdoInsert('card_user_tbl',array('card_order_id'=>$row['order_id'],'card_id'=>$row['card_id'],'card_code'=>$code?$code:$row['card_code'],'open_id'=>$_SESSION['openid'],'original_id'=>$_SESSION['openid']),'update');
+        }
         foreach ($_POST['getedCount'] as $k=>$value) {
             $str=' update card_order_tbl set getted=getted+'.$value.' where card_order_id="'.$k.'"';
             exeNew($str);

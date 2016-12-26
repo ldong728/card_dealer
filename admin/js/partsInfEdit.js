@@ -89,9 +89,9 @@ function getGInf() {
     $.post("ajax_request.php", {get_parts_inf:1,g_id: g_id}, function (data) {
         var inf = eval('(' + data + ')');
         if(0==inf.goodsInf.situation){
-            var stub='<a href="consle.php?goodsSituation=9&g_id='+g_id+'">上架</a>'
+            var stub='<a href="controller.php?goodsSituation=9&g_id='+g_id+'">上架</a>'
         }else{
-            var stub='<a href="consle.php?goodsSituation=0&g_id='+g_id+'">下架</a>'
+            var stub='<a href="controller.php?goodsSituation=0&g_id='+g_id+'">下架</a>'
         }
         $('#intro').append(inf.goodsInf.intro);
         $('#changeSituation').append(stub);

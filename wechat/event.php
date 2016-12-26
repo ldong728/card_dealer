@@ -41,6 +41,7 @@ function user_del_card($msg){
 function user_consume_card($msg){
     $card_code=$msg['UserCardCode'];
     pdoUpdate('card_user_tbl',array('status'=>3),array('card_code'=>$card_code));
+    pdoInsert('card_consume_recorder_tbl',array('code'=>$card_code,'openid'=>$msg['from']),'update');
     return;
 }
 function user_gifting_card($msg){

@@ -33,36 +33,16 @@ sup {
     font-size: 22px;
 }
 
-
-
-div.module-block{
-    box-sizing: border-box;
-    position: relative;.
-    width: 100%;
-    min-height: 80px;
-    margin-top: 3%;
-    padding-top: 2%;
-    border-style: solid;
-    border-width: thin;
-}
-div .module-title{
-    padding: 0 1%;
-    width: auto;
-    height: 1.5em;
-    position: absolute;
-    top:-0.7em;
-    left:2%;
-    background-color:#ffffff;
-}
-
-
-div.mobileView {
+.uploadImg {
+    display: inline-block;
+    padding: 15px;
+    background: #f8f8f8;
     position: relative;
-    float: left;
-    /*width: 500px;*/
-    /*max-height: 800px;*/
-    /*overflow: hidden;*/
+    border: 1px #ccc solid;
 }
+
+
+
 
 iframe {
     /*width: 480px;*/
@@ -343,27 +323,13 @@ table{
     border-style: solid;
 
 }
-td{
-    width: auto;
-    font-size: 0.7em;
-    line-height: 1.5em;
-    min-height: 1.6em;
-    padding: 0;
-    text-align: center;
-    border-width: thin;
-    border-style: solid;
 
-}
 table button{
     padding: 0;
     width: 50px;
     /*height:6px;*/
     display: inline;
     font-size: 0.7em;
-}
-table input{
-    display: inline;
-    width: 60%;
 }
 table div.delete{
     /*display: inline-block;*/

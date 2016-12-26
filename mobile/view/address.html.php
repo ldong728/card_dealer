@@ -128,7 +128,7 @@
             if($('#address_id').val()>-1)addrData.id=$('#address_id').val();
             $.post('ajax.php',{addr:'add_addr',data:addrData},function(data){
                 if(backHandle(data)){
-                   location.reload(true);
+                   location.href='controller.php?consume_online=1';
                 }
             });
 

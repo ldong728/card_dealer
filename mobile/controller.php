@@ -187,7 +187,10 @@ function address_select($openid,$action){
     foreach ($addrQuery as $row) {
         $addrlist[] = $row;
     }
-    if (!$addrlist) $addrlist = array();
+    if (!$addrlist){
+        mylog('no address');
+        $addrlist = array();
+    }
     include "view/address.html.php";
 }
 function card_list()
@@ -210,7 +213,7 @@ function card_order()
 function card_bought_list()
 {//进入已购买但未领取列表
     global $card;
-    $query = pdoQuery('card_order_tbl', null, array('open_id' => $_SESSION['openid']), ' limit 5');
+    $query = pdoQuery('card_order_tbl', null, array('open_id' => $_SESSION['openid']), ' and getted<number limit 5');
     for ($i = 0; $i < 5 && $row = $query->fetch(); $i++) {
         mylog('first $i: '.$i);
         for ($j = 0; $j < ($row['number'] - $row['getted']) && $i < 5; $j++) {
