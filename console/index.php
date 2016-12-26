@@ -26,6 +26,7 @@ if (isset($_SESSION['partner'])) {
     if(isset($_GET['sub'])){
         $func='menu_'.$_GET['sub'];
         $func();
+        exit;
     }
 
     printView('view/blank.html.php', '控制台', '/console');

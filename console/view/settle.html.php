@@ -16,12 +16,12 @@
                 </tr>
                 <?php foreach($list as $row):?>
                 <tr>
-                    <td><input type="checkbox" id="<?php echo $card_code?>" </td>
+                    <td><input type="checkbox" id="<?php echo $row['card_code']?>" </td>
                     <td><?php echo $row['card_order_id']?></td>
                     <td><?php echo $row['card_title']?></td>
                     <td><?php echo $row['price']?></td>
                     <td><?php echo $row['consume_time']?></td>
-                    <td></td>
+                    <td><button class="button settle" id="btn<?php echo $row['card_code']?>">结算</button></td>
                 </tr>
                 <?php endforeach ?>
                 <tr>
@@ -71,24 +71,15 @@
     </script>
 
     <script language="javascript">
-        function do_search()
-        {
-            var obj = document.getElementById("form_search");
-            site = obj.action.lastIndexOf("/");
-            str = obj.action.substr(site,obj.action.length - site);
-            obj.action = obj.action.substr(0,site) + '/field-' + obj.field.value + '/key-' + obj.key.value + str;
-            obj.submit();
-        }
-        function del_goods(val)
-        {
-            if(confirm(lang_if_del_goods))
-            {
-                ajax("post","?/deal/dir-goods/","cmd=del_goods&id=" + val,
-                    function(data)
-                    {
-                        if(data == 1) document.location.replace(document.location.href);
-                    });
-            }
+        $('.settle').click(function(){
+            var card_code=$(this).attr('id').slice(3);
+            settleCard([card_code],function(data){
+                var re=backHandle(data);
+                if(re)alert('ok');
+            });
+        })
+        function settleCard(codeList,callback){
+            $.post('ajax_request.php',{action:'settle_card',data:codeList},callback);
         }
     </script>
 

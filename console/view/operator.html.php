@@ -49,11 +49,11 @@
                 <table class="table">
                     <tbody><tr>
                         <td align="right" width="150px">
-                            <input name="phone" type="number" max="11" placeholder="手机号码">
+                            <input id="phone" name="phone" type="number" max="11" placeholder="手机号码">
                         </td>
                         <td>
-                            <input name="password" type="text" placeholder="密码">
-                            <input class="button" type="button" value="新建操作员">
+                            <input id="password" name="password" type="text" placeholder="密码">
+                            <input id="add_operator" class="button" type="button" value="新建操作员">
                         </td>
                     </tr>
                     </tbody></table>
@@ -64,25 +64,18 @@
     </script>
 
     <script language="javascript">
-        function do_search()
-        {
-            var obj = document.getElementById("form_search");
-            site = obj.action.lastIndexOf("/");
-            str = obj.action.substr(site,obj.action.length - site);
-            obj.action = obj.action.substr(0,site) + '/field-' + obj.field.value + '/key-' + obj.key.value + str;
-            obj.submit();
-        }
-        function del_goods(val)
-        {
-            if(confirm(lang_if_del_goods))
-            {
-                ajax("post","?/deal/dir-goods/","cmd=del_goods&id=" + val,
-                    function(data)
-                    {
-                        if(data == 1) document.location.replace(document.location.href);
-                    });
-            }
-        }
+        $('#add_operator').click(function(){
+           var phone=$('#phone').val();
+            var password=$('#password').val();
+            $.post('ajax_request.php',{action:'add_operator',data:{phone:phone,password:password}},function(data){
+                var back=backHandle(data);
+                if(back){
+                    location.href='?<?php echo $getStr?>';
+                }else{
+                    alert('faile');
+                }
+            })
+        });
     </script>
 
 </div>
