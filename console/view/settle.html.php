@@ -1,4 +1,4 @@
-<?php global $getStr,$page,$num,$orderIndex,$order,$list;
+<?php global $getStr,$page,$num,$orderIndex,$order,$list,$balence;
 ?>
 
 <div id="core" style="height: 618px;">
@@ -45,25 +45,19 @@
     </div>
     <div class="space"></div>
     <div class="block">
-        <div class="head" style="width: 98%;"><span>搜索产品</span></div>
+        <div class="head" style="width: 98%;"><span>账户信息</span></div>
         <div class="main">
-            <form id="form_search" method="post" action="?/goods/mod-sheet/index.html">
+
                 <table class="table">
                     <tbody><tr>
                         <td align="right" width="150px">
-                            <select name="field">
-                                <option value="goo_title">产品名称</option>
-                                <option value="goo_sn">产品编号</option>
-                                <option value="goo_text">产品描述</option>
-                            </select>
+                            当前账户：
                         </td>
                         <td>
-                            <input name="key" type="text">
-                            <input class="button" type="button" value="搜索产品" onclick="do_search()">
+                            ￥<?php echo $balence?>
                         </td>
                     </tr>
                     </tbody></table>
-            </form>
         </div>
     </div>
     <script language="javascript">
@@ -75,7 +69,11 @@
             var card_code=$(this).attr('id').slice(3);
             settleCard([card_code],function(data){
                 var re=backHandle(data);
-                if(re)alert('ok');
+                if(re) {
+                    location.href='?<?php echo $getStr?>';
+                }else{
+                    alert('结算失败，请重试');
+                }
             });
         })
         function settleCard(codeList,callback){

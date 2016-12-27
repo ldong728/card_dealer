@@ -19,7 +19,7 @@ function uploadLogo($file)
     if(isset($backArray['url'])){
         return $backArray['url'];
     }else{
-        return 'error';
+        return $backArray['errcode'];
     }
 }
 function encodeCard($encryptCode){

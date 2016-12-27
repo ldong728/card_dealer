@@ -54,17 +54,26 @@ if (isset($_SESSION['partner'])) {
 }
 
 function menu_settle(){
-    global $getStr,$page,$num,$orderIndex,$order,$list;
+    global $getStr,$page,$num,$orderIndex,$order,$list,$balence;
     $query=pdoQuery('pre_settle_view',array('card_order_id','card_title','card_id','price','card_code','consume_time','type'),array('partner_id'=>$_SESSION['partner']),'order by '.$orderIndex.' '.$order.' limit '.$num*$page.','.$num);
     foreach($query as $row){
         $list[]=$row;
     }
+    $balence=pdoQuery('partner_account_tbl',array('total_balence'),array('partner_id'=>$_SESSION['partner']),' limit 1');
+    $balence=$balence->fetch()['total_balence'];
     $list=$list?$list:array();
     printView('view/settle.html.php','待结算列表');
 }
 function menu_operator(){
     $list=getList('partner_operator_view');
     printView('view/operator.html.php');
+    exit;
+
+}
+function menu_pre_express(){
+    global $getStr,$page,$num,$orderIndex,$order,$list;
+    $list=getList('express_view');
+    printView('view/express_list.html.php');
     exit;
 
 }

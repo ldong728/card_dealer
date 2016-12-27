@@ -65,6 +65,14 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a class="main_menu">发货信息</a>
+                <ul class="sub_menu" style="display: <?php echo isset($_GET['menu'])&&'express'==$_GET['menu']? 'block' : 'none' ?>">
+                    <li>
+                        <a href="index.php?menu=express&sub=pre_express">待发货</a>
+                    </li>
+                </ul>
+            </li>
 
 <!--            --><?php //foreach($_SESSION['pms'] as $key=>$row):?>
 <!--                <li>-->

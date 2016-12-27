@@ -33,6 +33,8 @@ function settle_card($data){
     try{
         pdoUpdate('card_user_tbl',array('status'=>4),array(),$whereStr);
         pdoInsert('account_record_tbl',array('partner_id'=>$_SESSION['partner'],'fee'=>$totalPrice,'nonce'=>getRandStr(16)));
+        $str='update partner_account_tbl set total_balence=total_balence+'.$totalPrice.' where partner_id='.$_SESSION['partner'];
+        exeNew($str);
         pdoCommit();
         echo ajaxBack();
     }catch(PDOException $e){

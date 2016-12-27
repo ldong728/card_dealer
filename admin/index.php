@@ -3,11 +3,15 @@
 include_once '../includePackage.php';
 include_once '../wechat/serveManager.php';
 session_start();
-$page=isset($_GET['page'])? $_GET['page'] : 0;
 $num=15;
 $getStr = '';
+$page=isset($_GET['page'])? $_GET['page'] : 0;
+$orderIndex=isset($_GET['index'])?$_GET['index']:'id';
+$order=isset($_GET['order'])?$_GET['order']:'asc';
 foreach ($_GET as $k => $v) {
     if ($k == 'page') continue;
+    if ($k == 'index') continue;
+    if ($k == 'order') continue;
     $getStr .= $k . '=' . $v . '&';
 }
 $getStr=rtrim($getStr,'&');
@@ -92,6 +96,10 @@ if (isset($_SESSION['login']) && DOMAIN == $_SESSION['login']) {
 
     include 'view/login.html.php';
     exit;
+}
+function card_create(){
+    $parnerQuery=pdoQuery('partner_tbl',array('id','p_inf'),null,null);
+    printAdminView('admin/view/card_edit.html.php','创建卡券');
 }
 function operator(){
     global $pmsList,$opList;
