@@ -98,7 +98,9 @@ if (isset($_SESSION['login']) && DOMAIN == $_SESSION['login']) {
     exit;
 }
 function card_create(){
-    $parnerQuery=pdoQuery('partner_tbl',array('id','p_inf'),null,null);
+    global $parnerQuery;
+    $parnerQuery=pdoQuery('partner_tbl',array('id','p_code','p_inf'),null,null);
+    $parnerQuery=$parnerQuery->fetchAll();
     printAdminView('admin/view/card_edit.html.php','创建卡券');
 }
 function operator(){

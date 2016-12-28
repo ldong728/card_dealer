@@ -23,7 +23,6 @@
     var cardId='<?php echo $cardId ?>';
     $('.card_order_confirm').click(function(){
         var number=$('.card_order_number').val();
-
         $.post('ajax.php',{module:'pay_pre',card_id:cardId,number:number},function(data){
             console.log(data);
             var back=eval('('+data+')');

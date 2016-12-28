@@ -70,7 +70,6 @@ if (isset($_GET['action'])) {
     $func='action_'.$_GET['action'];
     $func();
 }
-
 if (isset($_GET['consume_online'])) {
     action_consume_online();
 }
@@ -199,8 +198,7 @@ function card_list()
 }
 function card_mall()
 {
-    mylog($_SESSION['user_level']);
-    $cardList = pdoQuery('card_view', null, array('user_level' => $_SESSION['user_level']), null);
+    $cardList = pdoQuery('card_view', null, array('user_level' => $_SESSION['user_level']), 'and end_time>now()');
     include 'view/card_mall.html.php';
 }
 function card_order()

@@ -104,8 +104,9 @@ function pay_pre(){
     if(is_array($data)){
         echo ajaxBack($data);
     }else{
-        echo ajaxBack(null,6,$data);
+        echo ajaxBack(null,6,'支付出错');
     }
+    exit;
 
 
 }

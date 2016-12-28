@@ -40,6 +40,10 @@ class cardsdk{
         return $str;
     }
 
+    public function createCard($data){
+        $re=interfaceHandler::getHandler()->postJsonByCurl('https://api.weixin.qq.com/card/create?access_token=ACCESS_TOKEN',$data);
+        return json_decode($re,true);
+    }
     public function getSignPackage($cardType) {
         $cardapiTicket = $this->getCardApiTicket();
         $timestamp = time();

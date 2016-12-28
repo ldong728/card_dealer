@@ -1,5 +1,6 @@
 <?php
 include_once '../includePackage.php';
+include_once '../wechat/cardsdk.php';
 session_start();
 
 if (isset($_SESSION['login'])&&DOMAIN==$_SESSION['login']) {
@@ -102,6 +103,37 @@ if (isset($_SESSION['login'])&&DOMAIN==$_SESSION['login']) {
         echo ajaxBack(null,9,'无权限');
         exit;
     }
+}
+function create_card(){
+    $data=$_POST['data'];
+
+    $inf=$data['inf'];
+//    mylog('data:'.json_encode($data,JSON_UNESCAPED_UNICODE));
+//    mylog('data:'.json_encode($data,JSON_UNESCAPED_UNICODE));
+    $card=new cardsdk();
+    $card_inf=$card->createCard($data['card']);
+//    mylog(getArrayInf($card_inf));
+    if(0==$card_inf['errcode']){
+        $card_id=$card_inf['card_id'];
+        foreach ($data['price'] as $k=>$v) {
+            $price[]=array('card_id'=>$card_id,'user_level'=>$k,'price'=>$v);
+        }
+        $price=$price?$price:array();
+        pdoTransReady();
+        try{
+            pdoInsert('card_tbl',array('card_id'=>$card_id,'partner_id'=>$inf['partner_id'],'total_number'=>$inf['quantity'],'card_title'=>$inf['title'],'card_status'=>'CARD_STATUS_NOT_VERIFY','end_time'=>timeUnixToMysql($inf['end']),'color'=>$inf['color']),'update');
+            pdoBatchInsert('card_price_tbl',$price);
+            pdoCommit();
+            echo ajaxBack($card_id);
+        }catch(PDOException $e){
+            mylog($e->getMessage());
+            pdoRollBack();
+            echo ajaxBack(null,'8','数据库错误');
+        }
+    }else{
+        echo ajaxBack(null,'2','格式错误');
+    }
+    exit;
 }
 function get_article(){
     $id=$_POST['id'];

@@ -1,3 +1,4 @@
+<?php global $parnerQuery;?>
 <script src="js/ajaxfileupload.js"></script>
 
 <div id="core" style="height: 618px;">
@@ -29,40 +30,57 @@
         <div class="main">
             <table class="table baseInfo">
                 <tr>
-                    <input type="hidden" class="card_value" id="logo_url">
-                    <td>商户名字：</td><td><input class="card_value" id="brand_name" type="text" placeholder="商户名字"></td>
-                    <td>卡券名字：</td><td><input class="card_value" id="title" placeholder="卡券名"></td>
+                    <input type="hidden" class="base_info" id="logo_url">
+                    <td>商户名字：</td><td><input class="base_info" id="brand_name" type="text" placeholder="商户名字"></td>
+                    <td>卡券名字：</td><td><input class="base_info" id="title" placeholder="卡券名"></td>
                 </tr>
                 <tr>
                     <td>颜色：</td>
                     <td>
-                        <select class="card_value" id="color">
-                            <option value="Color010" style="color: #63b359">Color010</option>
-                            <option value="Color020" style="color: #2c9f67">Color020</option>
-                            <option value="Color030" style="color: #509fc9">Color030</option>
-                            <option value="Color040" style="color: #5885cf">Color040</option>
-                            <option value="Color050" style="color: #9062c0">Color050</option>
-                            <option value="Color060" style="color: #d09a45">Color060</option>
-                            <option value="Color070" style="color: #e4b138">Color070</option>
-                            <option value="Color080" style="color: #ee903c">Color080</option>
-                            <option value="Color081" style="color: #f08500">Color081</option>
-                            <option value="Color082" style="color: #a9d92d">Color082</option>
-                            <option value="Color090" style="color: #dd6549">Color090</option>
-                            <option value="Color100" style="color: #cc463d">Color100</option>
-                            <option value="Color101" style="color: #cf3e36">Color101</option>
-                            <option value="Color102" style="color: #5E6671">Color102</option>
+                        <select class="base_info" id="color">
+                            <option value="Color010" style="color: #63b359">#63b359</option>
+                            <option value="Color020" style="color: #2c9f67">#2c9f67</option>
+                            <option value="Color030" style="color: #509fc9">#509fc9</option>
+                            <option value="Color040" style="color: #5885cf">#5885cf</option>
+                            <option value="Color050" style="color: #9062c0">#9062c0</option>
+                            <option value="Color060" style="color: #d09a45">#d09a45</option>
+                            <option value="Color070" style="color: #e4b138">#e4b138</option>
+                            <option value="Color080" style="color: #ee903c">#ee903c</option>
+                            <option value="Color081" style="color: #f08500">#f08500</option>
+                            <option value="Color082" style="color: #a9d92d">#a9d92d</option>
+                            <option value="Color090" style="color: #dd6549">#dd6549</option>
+                            <option value="Color100" style="color: #cc463d">#cc463d</option>
+                            <option value="Color101" style="color: #cf3e36">#cf3e36</option>
+                            <option value="Color102" style="color: #5E6671">#5E6671</option>
                         </select>
                     </td>
-                    <td>服务电话：</td><td><input type="tel" class="card_value" id="service_phone" </td>
+                    <td>服务电话：</td><td><input type="tel" class="base_info" id="service_phone" </td>
                 </tr>
                 <tr>
-                    <td>副标题：</td><td><input type="text" class="card_value" id="sub_title"></td>
-                    <td>code展示类型：</td><td>默认<input type="hidden" class="card_value" id="code_type" value="CODE_TYPE_ONLY_BARCODE"> </td>
+                    <td>副标题：</td><td><input type="text" class="base_info" id="sub_title"></td>
+                    <td>code展示类型：</td><td>默认<input type="hidden" class="base_info" id="code_type" value="CODE_TYPE_ONLY_BARCODE"> </td>
                 </tr>
                 <tr>
-                    <td>使用提醒：</td><td><input type="text" maxlength="25" class="card_value" id="notice"></td>
-                    <td>卡券使用说明</td><td><textarea cols="30" rows="3" class="card_value" id="description"></textarea></td>
+                    <td>使用提醒：</td><td><input type="text" maxlength="25" class="base_info" id="notice"></td>
+                    <td>卡券使用说明：</td><td><textarea cols="30" rows="3" class="base_info" id="description"></textarea></td>
                 </tr>
+                <tr>
+                    <td>生效时间：</td><td><input class="date_info" data-key="date_info" id="begin_timestamp" type="date" ></td>
+                    <td>有效期至：</td><td><input class="date_info" id="end_timestamp" type="date" ></td>
+                </tr>
+                <tr>
+                    <td>发行量：</td><td><input class="sku" id="quantity" type="number" value="1000"></td><td>定价：</td><td><input type="text" id="price"></td>
+                </tr>
+                <tr>
+                    <td>选择商户</td>
+                    <td><select id="partner_id">
+                            <?php foreach($parnerQuery as $row):?>
+                            <option value="<?php echo $row['id']?>"><?php echo $row['p_code']?></option>
+                            <?php endforeach ?>
+                    </select></td>
+                    <td colspan="2"><button class="button" id="card_create">创建</button> </td>
+                </tr>
+
 <!--                <div class="wrap" id="card">-->
 <!--                <input class="card_type" id="card_type" placeholder="卡券类型">-->
 <!---->
@@ -107,14 +125,62 @@
         </div>
     </div>
     <div class="space"></div>
-    <div class="block">
-        <div class="head" style="width: 98%;"><span>商家选择</span></div>
-        <div class="main">
 
-        </div>
-    </div>
     <input type="file" id="logo-up" name="logo-up" style="display: none">
     <script>
+        var card = {
+            card: {
+                card_type: 'GIFT', gift: {
+                    base_info: {
+                        date_info: {type: 'DATE_TYPE_FIX_TIME_RANGE'},
+                        sku: {},
+                        get_limit: 500,
+                        use_custom_code: false,
+                        bind_openid: true,
+                        can_share: false,
+                        can_give_friend: true,
+                        center_sub_title: "线下使用",
+                        custom_url_name: "立即使用",
+                        custom_url: "<?php echo 'http://' . $_SERVER['HTTP_HOST'] . DOMAIN ?>/mobile/controller.php?consume_online=1",
+                        custom_url_sub_title: "快递到家",
+                        promotion_url_name: "更多优惠",
+                        promotion_url: "<?php echo 'http://' . $_SERVER['HTTP_HOST'] . DOMAIN ?>/mobile/controller.php?card_mall=1",
+                        source: "谷多电子商务"
+                    },
+                    gift:"卡券测试"
+                }
+            }
+        };
+    </script>
+    <script>
+        $('#card_create').click(function() {
+            $.each($('.base_info'), function (k, v) {
+                var value = jQuery(v);
+                card.card.gift.base_info[v.id] = value.val();
+            });
+            var title=$('#title').val();
+            var color=$('#color').find('option:selected').text();
+            var begin=Math.round(new Date($('#begin_timestamp').val()).getTime()/1000);
+            var end=Math.round(new Date($('#end_timestamp').val()).getTime()/1000);
+            var quantity=$('#quantity').val();
+            card.card.gift.base_info.sku.quantity = quantity;
+            card.card.gift.base_info.date_info.begin_timestamp = begin;
+            card.card.gift.base_info.date_info.end_timestamp = end;
+            var cardString=JSON.stringify(card);
+//            alert(JSON.stringify(card));
+//            var data={card: card, inf:{partner_id: $('#partner_id').val(),title:title,color:color,begin:begin,end:end,quantity:quantity}, price: {0: $('#price').val()}}
+//            alert(JSON.stringify(data));
+
+            $.post('ajax_request.php', {
+                pms: pms,
+                method: 'create_card',
+                data: {card: cardString, inf:{partner_id: $('#partner_id').val(),title:title,color:color,begin:begin,end:end,quantity:quantity}, price: {0: $('#price').val()}}
+            }, function (data) {
+                var re=backHandle(data);
+                alert(re);
+            });
+
+        });
         $(document).on('click', '.uploadImg', function () {
             $('#logo-up').click();
         });
@@ -132,6 +198,7 @@
                         $('#title_demo').fadeIn('fast');
                         $('.blank').hide();
                         $('#title_name').val(v.url);
+                        $('#logo_url').val(v.logo);
                     } else {
                         showToast(v.state);
                     }
