@@ -37,7 +37,8 @@
                     });
                     $.post('ajax.php',cardinf,function(data){
                         var re=eval('('+data+')');
-                        alert(re.errcode)
+                        wx.closeWindow();
+//                        alert(re.errcode);
                     });
                 },
                 fail:function (res) {

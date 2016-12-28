@@ -101,6 +101,7 @@ function pay_pre(){
     $wxPay->setOrderId($order_id)->setTotalFee($number*$price);
     $array=$wxPay->prePay();
     $data=$wxPay->getH5Package();
+    mylog($data);
     if(is_array($data)){
         echo ajaxBack($data);
     }else{
@@ -112,22 +113,27 @@ function pay_pre(){
 }
 function get_card(){
     include_once '../wechat/cardsdk.php';
-    mylog(json_encode($_POST));
+//    mylog(json_encode($_POST));
     $cardList=$_POST['cardList'];
     $value=array();
     $card=new cardsdk();
-
-
     pdoTransReady();
+    $cardIdlist=array();
     try{
         foreach ($cardList as $row) {
             $code=$card->encodeCardCode($row['card_code']);
             pdoInsert('card_user_tbl',array('card_order_id'=>$row['order_id'],'card_id'=>$row['card_id'],'card_code'=>$code?$code:$row['card_code'],'open_id'=>$_SESSION['openid'],'original_id'=>$_SESSION['openid']),'update');
+            $cardIdlist[$row['card_id']]=isset($cardIdlist[$row['card_id']])?$cardIdlist[$row['card_id']]+1 : 1;
         }
         foreach ($_POST['getedCount'] as $k=>$value) {
             $str=' update card_order_tbl set getted=getted+'.$value.' where card_order_id="'.$k.'"';
             exeNew($str);
         }
+        foreach ($cardIdlist as $cardid => $num) {
+            $str='update card_tbl set gived_number=gived_number+'.$num.' where card_id="'.$cardid.'"';
+            exeNew($str);
+        }
+
         pdoCommit();
         echo ajaxBack();
     }catch(PDOException $e){

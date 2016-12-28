@@ -50,7 +50,8 @@
                 )
 
             }else{
-                alert(data.err_code);
+                alert(back.errmsg);
+                location.href='?module=card_bought_list'
             }
         });
 //        alert(cardId+': '+number);

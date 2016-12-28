@@ -15,6 +15,7 @@ foreach ($_GET as $k => $v) {
     $getStr .= $k . '=' . $v . '&';
 }
 $getStr=rtrim($getStr,'&');
+$filter=' order by '.$orderIndex.' '.$order.' '.'limit '.$num*$page.','.$num;
 if (isset($_GET['logout'])) {//登出
     session_unset();
     include 'view/login.html.php';
@@ -23,39 +24,6 @@ if (isset($_GET['logout'])) {//登出
 if (isset($_SESSION['login']) && DOMAIN == $_SESSION['login']) {
     if (isset($_GET['menu']) && array_key_exists($_GET['menu'], $_SESSION['pms'])) {
         switch ($_GET['sub']) {
-            case 'add_dealer':
-                $rank='';
-                if(isset($_SESSION['dealer_rank'])){
-                    $rank=' where rank>'.$_SESSION['dealer_rank'];
-                }else{
-                    $rank='where rank>0';
-                }
-                $rank=pdoQuery('gd_user_rank',null,null,$rank. ' order by rank asc');
-                printAdminView('admin/view/dealer_add.html.php', '新建用户');
-                break;
-            case 'dealer_list':
-                $page=$_GET['page'];
-                $where=null;
-                $rank=0;
-                if(isset($_SESSION['dealer_id'])){
-                    $where=array('use_parent_id'=>$_SESSION['dealer_id']);
-
-                }
-                $dealerList=pdoQuery('gd_users',null,$where,' limit ' . $page * $num . ', ' .$num);
-                printAdminView('admin/view/dealer_list.html.php','经销商列表');
-                break;
-            case 'dealer_audit':
-                if($_SESSION['dealer_grade']===0){
-                    $page=$_GET['page'];
-                    $where=null;
-//                    if(isset($_SESSION['dealer_id']))$where=array('f_id'=>$_SESSION['dealer_id']);
-//                    else $where=array('f_id'=>'0');
-                    $dealerList=pdoQuery('gd_audit_view',null,null,' limit ' . $page * $num . ', ' .$num);
-                    printAdminView('admin/view/dealer_audit.html.php','经销商审核');
-                }else{
-                    printAdminView('admin/view/blank.html.php','首页');
-                }
-                break;
             case 'wx_config':
                 printAdminView('admin/view/wechatConfig.html.php','微信设置');
                 break;
@@ -102,6 +70,21 @@ function card_create(){
     $parnerQuery=pdoQuery('partner_tbl',array('id','p_code','p_inf'),null,null);
     $parnerQuery=$parnerQuery->fetchAll();
     printAdminView('admin/view/card_edit.html.php','创建卡券');
+}
+function card_list(){
+    global $filter,$getStr,$num,$orderIndex,$order,$list;
+    $query=pdoQuery('card_partner_view',null,null,$filter);
+    $list=$query->fetchAll();
+    printAdminView('admin/view/card_list.html.php','卡券列表');
+}
+function add_partner(){
+    printAdminView('admin/view/add_partner.html.php','添加商户');
+}
+function partner_list(){
+    global $filter,$getStr,$num,$orderIndex,$order,$list;
+    $query=pdoQuery('partner_tbl',null,null,$filter);
+    $list=$query->fetchAll();
+    printAdminView('admin/view/partner_list.php');
 }
 function operator(){
     global $pmsList,$opList;
@@ -175,11 +158,4 @@ function activities(){
     $count=$count->fetch()['count'];
     $source=getConfig('../config/mainConfig.json')['activity_source'];
     printAdminView('admin/view/activities_list.html.php');
-}
-function goods_verify(){
-
-    printAdminView('admin/view/blank.html.php');
-}
-function dealer_verify(){
-    printAdminView('admin/view/blank.html.php');
 }
