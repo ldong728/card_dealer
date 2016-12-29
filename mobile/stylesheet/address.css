@@ -1,3 +1,20 @@
+body, div, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, menu, nav, section, a, span, label, em, strong, b, i, del {
+    margin: 0;
+    padding: 0;
+    font: 12px/16px microsoft yahei, Verdana, Arial;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    font-size: 13px;
+    line-height: 16px;
+    /*font-family: 'microsoft yahei', Verdana, Arial;*/
+    font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Arial;
+    border-color: #939393;
+    border-width: thin;
+    -webkit-tap-highlight-color:transparent;
+
+}
 .editAddress{width:100%; min-width:300px; max-width:1024px; padding-bottom:20px;}
 .add_Address_edit{width:100%; min-width:300px; max-width:1024px;}
 .myAddress{width:94%; min-width:300px; max-width:1024px; margin:0 3%; margin-top:20px; overflow:hidden;}

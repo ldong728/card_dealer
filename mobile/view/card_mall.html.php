@@ -29,7 +29,7 @@
             </div>
         </a>
         <a href="?module=card_order&card_id=<?php echo $row['card_id']?>">
-            <div class="m-r float" style="border-color: <?php echo $row['color']?>">购买</div>
+            <div class="m-r float" style="border-color: <?php echo $row['color']?>">购&nbsp买</div>
         </a>
     </div>
     <?php endforeach ?>

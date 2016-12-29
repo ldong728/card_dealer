@@ -19,7 +19,8 @@ function user_get_card($msg){
             pdoUpdate('card_user_tbl',array('card_code'=>$msg['UserCardCode'],'open_id'=>$msg['FromUserName'],'status'=>'0','update_time'=>timeUnixToMysql(time())),array('card_code'=>$msg['OldUserCardCode'],'card_id'=>$msg['CardId']));
             pdoInsert('card_record_tbl',array('card_id'=>$msg['CardId'],'from_card_code'=>$msg['OldUserCardCode'],'to_card_code'=>$msg['UserCardCode'],'from_id'=>$msg['FriendUserName'],'to_id'=>$msg['FromUserName']));
         }else{
-            pdoInsert('card_user_tbl',array('card_id'=>$msg['CardId'],'card_code'=>$msg['UserCardCode'],'open_id'=>$msg['FromUserName'],'original_id'=>$msg['FromUserName']),'ignore');
+
+            pdoInsert('card_user_tbl',array('card_id'=>$msg['CardId'],'card_code'=>$msg['UserCardCode'],'open_id'=>$msg['FromUserName'],'original_id'=>$msg['FromUserName'],'status'=>7),'ignore');
         }
         pdoCommit();
     }catch(PDOException $e){

@@ -36,6 +36,7 @@
                         cardinf.cardList[key].card_code= v.code;
                     });
                     $.post('ajax.php',cardinf,function(data){
+                        alert(data);
                         var re=eval('('+data+')');
                         wx.closeWindow();
 //                        alert(re.errcode);
@@ -43,17 +44,6 @@
                 },
                 fail:function (res) {
 //                    alert(data.errMsg);
-                },
-                complete:function(res){
-//                    var cardList = res.cardList; // 添加的卡券列表信息
-//                    $.each(cardList,function(k,v){
-//                        var data=eval('('+ v.cardExt+')');
-//                        var key=data.nonce_str.slice(14);
-//                        cardinf.cardList[key].card_code= v.code;
-//                    });
-//                    $.post('ajax.php',cardinf,function(data){
-//
-//                    });
                 }
             });
     }

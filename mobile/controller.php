@@ -204,23 +204,27 @@ function card_mall()
 function card_order()
 {
     $cardId = $_GET['card_id'];
-//    mylog('card_order reached '.$cardId);
+    $cardInf=pdoQuery('card_view',null,array('card_id'=>$cardId,'user_level'=>$_SESSION['user_level']),' limit 1');
+    $cardInf=$cardInf->fetch();
     include 'view/card_detail.html.php';
-//    echo 'ok,card_id='.$cardId;
 }
 function card_bought_list()
 {//进入已购买但未领取列表
     global $card;
     $query = pdoQuery('card_order_tbl', null, array('open_id' => $_SESSION['openid']), ' and getted<number limit 5');
-    for ($i = 0; $i < 5 && $row = $query->fetch(); $i++) {
-        mylog('first $i: '.$i);
+    $i=0;
+    while(($row=$query->fetch())&& $i<5){
         for ($j = 0; $j < ($row['number'] - $row['getted']) && $i < 5; $j++) {
             mylog('$i: '.$i.'  $j: '.$j);
             $cardInfList[] = array('id' => $row['card_id'], 'ext' => json_encode($card->getCardExt($_SESSION['openid'], $row['card_id'], (string)$row['card_order_id'])));//将14位长订单号放入随机字串中
             $i++;
         }
     }
-    include 'view/get_card_view.html.php';
+    if(isset($cardInfList))include 'view/get_card_view.html.php';
+    else{
+        $errmsg='暂无可领取卡券';
+        include('view/error.html.php');
+    }
 
 }
 function card_getCardList(){

@@ -1,6 +1,6 @@
 <head>
     <?php include 'templates/header.php' ?>
-    <!--    <link rel="stylesheet" href="stylesheet/address.css"/>-->
+        <link rel="stylesheet" href="stylesheet/ticket.css?t=<?php echo rand(1000,999)?>"/>
 </head>
 <body>
 <div class="wrap">
@@ -10,6 +10,6 @@
 
 </body>
 <script>
-    location.href='controller.php?operator=scan';
+//    location.href='controller.php?operator=scan';
 
 </script>

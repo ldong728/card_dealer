@@ -25,7 +25,7 @@ if (isset($_SESSION['login']) && DOMAIN == $_SESSION['login']) {
     if (isset($_GET['menu']) && array_key_exists($_GET['menu'], $_SESSION['pms'])) {
         switch ($_GET['sub']) {
             case 'wx_config':
-                printAdminView('admin/view/wechatConfig.html.php','微信设置');
+                printAdminView('admin/view/wx_config.html.php','微信设置');
                 break;
             default:
                 $_GET['sub']();
@@ -65,6 +65,7 @@ if (isset($_SESSION['login']) && DOMAIN == $_SESSION['login']) {
     include 'view/login.html.php';
     exit;
 }
+
 function card_create(){
     global $parnerQuery;
     $parnerQuery=pdoQuery('partner_tbl',array('id','p_code','p_inf'),null,null);

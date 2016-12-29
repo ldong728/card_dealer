@@ -15,7 +15,7 @@ if(isset($_SESSION['consume_inf'])){
         exit;
     }
 }
-if(isset($_SESSION['operator'])){
+if(isset($_SESSION['operator'])&&isset($_POST['action'])){
     $func='op_'.$_POST['action'];
     $func();
     exit;
@@ -113,33 +113,50 @@ function pay_pre(){
 }
 function get_card(){
     include_once '../wechat/cardsdk.php';
-//    mylog(json_encode($_POST));
     $cardList=$_POST['cardList'];
     $value=array();
     $card=new cardsdk();
     pdoTransReady();
     $cardIdlist=array();
-    try{
-        foreach ($cardList as $row) {
-            $code=$card->encodeCardCode($row['card_code']);
-            pdoInsert('card_user_tbl',array('card_order_id'=>$row['order_id'],'card_id'=>$row['card_id'],'card_code'=>$code?$code:$row['card_code'],'open_id'=>$_SESSION['openid'],'original_id'=>$_SESSION['openid']),'update');
-            $cardIdlist[$row['card_id']]=isset($cardIdlist[$row['card_id']])?$cardIdlist[$row['card_id']]+1 : 1;
+    if(count($cardList)>1){
+        try{
+            foreach ($cardList as $row) {
+                $code=$card->encodeCardCode($row['card_code']);
+                pdoInsert('card_user_tbl',array('card_order_id'=>$row['order_id'],'card_id'=>$row['card_id'],'card_code'=>$code?$code:$row['card_code'],'open_id'=>$_SESSION['openid'],'original_id'=>$_SESSION['openid'],'status'=>'0'),'update');
+                $cardIdlist[$row['card_id']]=isset($cardIdlist[$row['card_id']])?$cardIdlist[$row['card_id']]+1 : 1;
+            }
+            foreach ($_POST['getedCount'] as $k=>$value) {
+                $str=' update card_order_tbl set getted=getted+'.$value.' where card_order_id="'.$k.'"';
+                exeNew($str);
+            }
+            foreach ($cardIdlist as $cardid => $num) {
+                $str='update card_tbl set gived_number=gived_number+'.$num.' where card_id="'.$cardid.'"';
+                exeNew($str);
+            }
+            pdoCommit();
+            echo ajaxBack();
+        }catch(PDOException $e){
+            mylog($e->getMessage());
+            pdoRollBack();
+            echo ajaxBack(null,9,'数据库错误');
         }
-        foreach ($_POST['getedCount'] as $k=>$value) {
-            $str=' update card_order_tbl set getted=getted+'.$value.' where card_order_id="'.$k.'"';
-            exeNew($str);
-        }
-        foreach ($cardIdlist as $cardid => $num) {
-            $str='update card_tbl set gived_number=gived_number+'.$num.' where card_id="'.$cardid.'"';
-            exeNew($str);
+    }elseif(1==count($cardList)){
+        $row=$cardList[0];
+        pdoTransReady();
+        try{
+            $updateNumber=pdoUpdate('card_user_tbl',array('card_order_id'=>$row['order_id'],'status'=>'0'),array('card_id'=>$row['card_id'],'open_id'=>$_SESSION['openid']),' limit 1');
+            if($updateNumber){
+                $str='update card_order_tbl set getted=getted+1 where card_order_id="'.$row['order_id'].'"';
+                exeNew($str);
+                $str='update card_tbl set gived_number=gived_number+1 where card_id="'.$row['card_id'].'"';
+            }
+        }catch(PDOException $e){
+            mylog($e->getMessage());
+            pdoRollBack();
+            echo ajaxBack(null,9,'数据库错误');
         }
 
-        pdoCommit();
-        echo ajaxBack();
-    }catch(PDOException $e){
-        mylog($e->getMessage());
-        pdoRollBack();
-        echo ajaxBack(null,9,'数据库错误');
     }
+
 
 }
