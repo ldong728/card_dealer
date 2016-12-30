@@ -44,14 +44,14 @@ class cardsdk{
         $re=interfaceHandler::getHandler()->postJsonByCurl('https://api.weixin.qq.com/card/create?access_token=ACCESS_TOKEN',$data);
         return json_decode($re,true);
     }
-    public function getSignPackage($cardType) {
+    public function getSignPackage($cardType,$card_id='') {
         $cardapiTicket = $this->getCardApiTicket();
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
-        $list=array($cardapiTicket,$timestamp,$nonceStr,APP_ID,$cardType);
+        $list=array($cardapiTicket,$card_id,$timestamp,$nonceStr,APP_ID,$cardType);
         $cardSign=$this->sign($list);
-
         $signPackage = array(
+            "cardId" =>$card_id,
             "nonceStr"  => $nonceStr,
             "timestamp" => $timestamp,
             "cardSign"=>$cardSign,

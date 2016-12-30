@@ -23,7 +23,6 @@ function formatOutput($string){
 //    $str=html($string);
     $str=preg_replace('/___/','<input type="text"/>',$string);
     return $str;
-
 }
 
 function printInf($p){

@@ -1,6 +1,6 @@
 <head>
     <?php include 'templates/header.php'?>
-    <link rel="stylesheet" href="stylesheet/address.css"/>
+    <link rel="stylesheet" href="stylesheet/address.css?t=<?php echo rand(1000,9999)?>"/>
 </head>
 <body>
 <div class="wrap">

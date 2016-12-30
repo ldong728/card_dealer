@@ -7,12 +7,12 @@
 <div class="header">
     <div class="h-wrap">
         <div class="h-l">
-            <a href="index.html">
+            <a href="?module=card_mall">
                 <input type="submit" value="微信卡券" class="sub1 s-cur">
             </a>
         </div>
         <div class="h-r">
-            <a href="mycard.html">
+            <a href="?module=my_card">
                 <input type="submit" value="我的卡券" class="sub2">
             </a>
         </div>
@@ -29,7 +29,7 @@
             </div>
         </a>
         <a href="?module=card_order&card_id=<?php echo $row['card_id']?>">
-            <div class="m-r float" style="border-color: <?php echo $row['color']?>">购&nbsp买</div>
+            <div class="m-r float" style="border-color: <?php echo $row['color']?>;color: <?php echo $row['color']?>">购&nbsp;买</div>
         </a>
     </div>
     <?php endforeach ?>

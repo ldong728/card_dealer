@@ -139,7 +139,7 @@ function login(){
 }
 function action_consume_online()
 {
-    if (!isset($_SESSION['consume_inf'])&&isset($_GET['encrypt_code'])){
+    if (isset($_GET['encrypt_code'])){
         $cardsdk = new cardsdk();
         $encrypt_code = $_GET['encrypt_code'];
         $code = $cardsdk->encodeCardCode($encrypt_code);
@@ -147,9 +147,13 @@ function action_consume_online()
             $openid = $_GET['openid'];
             $cardid = $_GET['card_id'];
             $_SESSION['consume_inf'] = array('openid' => $openid, 'cardid' => $cardid, 'code' => $code);
+        }else{
+            errOur('卡券信息异常');
         }
-    }else if(!isset($_SESSION['consume_inf'])&&!isset($_GET['encrypt_code'])){
-        //TODO session 过期后的处理方法
+    }else if(!isset($_SESSION['consume_inf'])){
+        $errmsg='网页已过期';
+        include 'view/error.html.php';
+        exit;
     }
     if(isset($_GET['address_change'])){
         address_select($_SESSION['consume_inf']['openid'],'consume_online');
@@ -161,13 +165,12 @@ function action_consume_online()
         $where=array('dft_a'=>1,'open_id'=>$_SESSION['consume_inf']['openid']);
     }
     $address=pdoQuery('address_tbl',null,$where,' limit 1');
-    if($address=$address->fetch()) {
-        $address=$address;
-    }else{
+    if(!$address=$address->fetch()) {
         address_select($_SESSION['consume_inf']['openid'],'consume_online');
         exit;
     }
-    $cardDetail=array();
+    $cardQuery=pdoQuery('card_user_view',null,array('card_code'=>$_SESSION['consume_inf']['code']),' limit 1');
+    $cardDetail=$cardQuery->fetch();
     include 'view/consume_detail.html.php';
     exit;
 }
@@ -200,6 +203,10 @@ function card_mall()
 {
     $cardList = pdoQuery('card_view', null, array('user_level' => $_SESSION['user_level']), 'and end_time>now()');
     include 'view/card_mall.html.php';
+}
+function my_card(){
+    $cardList=pdoQuery('card_user_view',null,array('open_id'=>$_SESSION['openid'],'status'=>'0'),null);
+    include 'view/my_card.html.php';
 }
 function card_order()
 {
@@ -253,6 +260,9 @@ function op_scan(){
         $logMode='operator';
         include 'view/login.html.php';
     }
+}
+function errOur($errmsg){
+    include 'view/error.html.php';
 }
 
 

@@ -118,7 +118,9 @@ function get_card(){
     $card=new cardsdk();
     pdoTransReady();
     $cardIdlist=array();
+    mylog(count($cardList));
     if(count($cardList)>1){
+        mylog();
         try{
             foreach ($cardList as $row) {
                 $code=$card->encodeCardCode($row['card_code']);
@@ -141,15 +143,19 @@ function get_card(){
             echo ajaxBack(null,9,'数据库错误');
         }
     }elseif(1==count($cardList)){
-        $row=$cardList[0];
-        pdoTransReady();
+
+        $row=reset($cardList);
+//        mylog(getArrayInf($cardList));
+        mylog(getArrayInf($row));
         try{
-            $updateNumber=pdoUpdate('card_user_tbl',array('card_order_id'=>$row['order_id'],'status'=>'0'),array('card_id'=>$row['card_id'],'open_id'=>$_SESSION['openid']),' limit 1');
+            $updateNumber=pdoUpdate('card_user_tbl',array('card_order_id'=>$row['order_id'],'status'=>'0'),array('card_id'=>$row['card_id'],'open_id'=>$_SESSION['openid'],'status'=>7),' limit 1');
             if($updateNumber){
                 $str='update card_order_tbl set getted=getted+1 where card_order_id="'.$row['order_id'].'"';
                 exeNew($str);
                 $str='update card_tbl set gived_number=gived_number+1 where card_id="'.$row['card_id'].'"';
             }
+            pdoCommit();
+            echo ajaxBack();
         }catch(PDOException $e){
             mylog($e->getMessage());
             pdoRollBack();
@@ -157,6 +163,26 @@ function get_card(){
         }
 
     }
+
+
+}
+function choose_card(){
+    $card_id=$_POST['card_id'];
+    $cardsdk=new cardsdk();
+    $signPackage=$cardsdk->getSignPackage('GIFT',$card_id);
+    echo ajaxBack($signPackage);
+
+}
+function encryp_code(){
+    $codeList=$_POST['code_list'];
+    $card=new cardsdk();
+    foreach ($codeList as $row) {
+        $code=$card->encodeCardCode($row['code']);
+        $back[]=array('cardId'=>$row['id'],'code'=>$code);
+    }
+
+    echo $back? ajaxBack($back):ajaxBack(null,8,'发生错误');
+
 
 
 }

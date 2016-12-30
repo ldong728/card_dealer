@@ -1,0 +1,66 @@
+/* CSS Document */
+@import url("reset.css");
+body{
+	font: 12px/1 Helvetica,Arial,"Microsoft YaHei",sans-serif;
+	box-sizing: border-box;
+	margin: 0 2.5%;
+	background-color: #eee;
+}
+.header{
+	padding: 25px 0 15px 0;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	border-bottom: 1px solid green;
+}
+.main{
+	padding-top: 25px;
+}
+.main a{
+	color: inherit;
+}
+.main input{
+	width: 100%;
+	height: 30px;
+	margin-top: 30px;
+	background-color: green;
+	border:1px solid green;
+	color: white;
+	border-radius: 3px;
+}
+.main-b{
+	margin-top: 50px;
+	position: relative;
+}
+.main-b a{
+	width: 12%;
+	float: left;
+}
+.main-b .img{
+	float: left;
+	width: 100%;
+    height: 35px;
+	padding-right: 10%;
+	box-sizing: border-box;
+    background: url(images/scan-icon.png) no-repeat;
+    background-size: 90% 100%;
+}
+.main-b .search{
+	float:left;
+	width: 68%;
+	height: 35px;
+	padding-left: 10px;
+	box-sizing: border-box;
+}
+.main-b .button{
+	float: left;
+	width: 20%;
+	height: 35px;
+	background-color: green;
+	border: 1px solid green;
+	box-sizing: border-box;
+    color: #ffffff;
+}
+.address-block {
+
+}
