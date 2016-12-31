@@ -20,7 +20,7 @@
                         <td><?php echo $row['card_title']?></td>
                         <td><?php echo $row['province'].' '.$row['city'].' '.$row['area'].' '.$row['address'].' '.$row['name'].' '.$row['phone']?></td>
                         <td><?php echo $row['create_time']?></td>
-                        <td><button class="button">详情</button></td>
+                        <td><button class="button detail" id="<?php echo $row['id']?>" >详情</button></td>
                     </tr>
                 <?php endforeach ?>
                 <tr>

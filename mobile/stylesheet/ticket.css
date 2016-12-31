@@ -64,3 +64,17 @@ body{
 .address-block {
 
 }
+dl.inf_wrap{
+    overflow: hidden;
+    zoom:1;
+}
+.dt{
+    float: left;
+    clear: left;
+    min-height: 25px;
+    width: 20%;
+    text-align: left;
+}
+.dd{
+    float: left;
+}
